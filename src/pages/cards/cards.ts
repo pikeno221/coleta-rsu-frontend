@@ -12,7 +12,7 @@ export class CardsPage {
   constructor(public navCtrl: NavController) {
     this.cardItems = [
       {
-        user: {
+        usuario: {
           avatar: 'assets/img/marty-avatar.png',
           name: 'Marty McFly'
         },
@@ -21,7 +21,7 @@ export class CardsPage {
         content: 'Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.',
       },
       {
-        user: {
+        usuario: {
           avatar: 'assets/img/sarah-avatar.png.jpeg',
           name: 'Sarah Connor'
         },
@@ -30,7 +30,7 @@ export class CardsPage {
         content: 'I face the unknown future, with a sense of hope. Because if a machine, a Terminator, can learn the value of human life, maybe we can too.'
       },
       {
-        user: {
+        usuario: {
           avatar: 'assets/img/ian-avatar.png',
           name: 'Dr. Ian Malcolm'
         },

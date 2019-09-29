@@ -10,7 +10,7 @@
 *.sublime-workspace
 .DS_Store
 Thumbs.db
-UserInterfaceState.xcuserstate
+usuarioInterfaceState.xcusuariostate
 $RECYCLE.BIN/
 
 *.log

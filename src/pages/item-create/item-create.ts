@@ -66,14 +66,14 @@ export class ItemCreatePage {
   }
 
   /**
-   * The user cancelled, so we dismiss without sending data back.
+   * The usuario cancelled, so we dismiss without sending data back.
    */
   cancel() {
     this.viewCtrl.dismiss();
   }
 
   /**
-   * The user is done and wants to create the item, so return it
+   * The usuario is done and wants to create the item, so return it
    * back to the presenter.
    */
   done() {

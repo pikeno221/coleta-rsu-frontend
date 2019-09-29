@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, MenuController, NavController, Platform } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
+import { Usuario } from '../../providers';
 
 export interface Slide {
   title: string;
@@ -30,7 +31,7 @@ export class TutorialPage {
   title5: string = 'Pense, Use, Reuse'
   description5: string = 'Agora que Você já está contextualizado, Vamos junto conosco, entre, descubra, aprenda, compartilhe e REUTILIZE!'
 
-  constructor(public navCtrl: NavController, public menu: MenuController, translate: TranslateService, public platform: Platform) {
+  constructor(public navCtrl: NavController, public usuarioService: Usuario, public menu: MenuController, translate: TranslateService, public platform: Platform) {
     this.dir = platform.dir();
     translate.get(["TUTORIAL_SLIDE1_TITLE",
       "TUTORIAL_SLIDE1_DESCRIPTION",
@@ -67,10 +68,12 @@ export class TutorialPage {
   }
 
   startApp() {
+    /*
     this.navCtrl.setRoot('WelcomePage', {}, {
       animate: true,
       direction: 'forward'
     });
+    */
   }
 
   onSlideChangeStart(slider) {
@@ -80,6 +83,14 @@ export class TutorialPage {
   ionViewDidEnter() {
     // the root left menu should be disabled on the tutorial page
     this.menu.enable(false);
+    this.usuarioService.findAll()
+    .subscribe(response => {
+      console.log(response);
+    },
+    error => {
+      console.log(error);
+    })
+    console.log(this.usuarioService.findAll());
   }
 
   ionViewWillLeave() {

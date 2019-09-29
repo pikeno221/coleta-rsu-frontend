@@ -1,12 +1,20 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { UsuarioDTO } from '../../models/usuario.dto';
+import { Observable } from 'rxjs';
 
 /**
  * Api is a generic REST Api handler. Set your API url first.
  */
 @Injectable()
 export class Api {
-  url: string = 'https://example.com/api/v1';
+
+  getUsuario(): Observable<UsuarioDTO[]> {
+
+    return this.http.get<UsuarioDTO[]>(this.url + '/usuarios');
+    
+  }
+  url: string = 'http://localhost:8081';
 
   constructor(public http: HttpClient) {
   }

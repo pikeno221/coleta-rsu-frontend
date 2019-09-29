@@ -23,8 +23,8 @@ export class ListMasterPage {
   }
 
   /**
-   * Prompt the user to add a new item. This shows our ItemCreatePage in a
-   * modal and then adds the new item to our data source if the user created one.
+   * Prompt the usuario to add a new item. This shows our ItemCreatePage in a
+   * modal and then adds the new item to our data source if the usuario created one.
    */
   addItem() {
     let addModal = this.modalCtrl.create('ItemCreatePage');

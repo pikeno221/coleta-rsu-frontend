@@ -3,20 +3,22 @@ import 'rxjs/add/operator/toPromise';
 import { Injectable } from '@angular/core';
 
 import { Api } from '../api/api';
+import { UsuarioDTO } from '../../models/usuario.dto';
+import { Observable } from 'rxjs/Rx';
 
 /**
- * Most apps have the concept of a User. This is a simple provider
+ * Most apps have the concept of a usuario. This is a simple provider
  * with stubs for login/signup/etc.
  *
- * This User provider makes calls to our API at the `login` and `signup` endpoints.
+ * This usuario provider makes calls to our API at the `login` and `signup` endpoints.
  *
  * By default, it expects `login` and `signup` to return a JSON object of the shape:
  *
  * ```json
  * {
  *   status: 'success',
- *   user: {
- *     // User fields your app needs, like "id", "name", "email", etc.
+ *   usuario: {
+ *     // usuario fields your app needs, like "id", "name", "email", etc.
  *   }
  * }Ø
  * ```
@@ -24,20 +26,24 @@ import { Api } from '../api/api';
  * If the `status` field is not `success`, then an error is detected and returned.
  */
 @Injectable()
-export class User {
-  _user: any;
+export class Usuario {
+  _usuario: any;
 
   constructor(public api: Api) { }
 
+  findAll() : Observable<UsuarioDTO[]>{
+    return this.api.getUsuario();
+  }
+
   /**
    * Send a POST request to our login endpoint with the data
-   * the user entered on the form.
+   * the usuario entered on the form.
    */
   login(accountInfo: any) {
     let seq = this.api.post('login', accountInfo).share();
 
     seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
+      // If the API returned a successful response, mark the usuario as logged in
       if (res.status == 'success') {
         this._loggedIn(res);
       } else {
@@ -51,13 +57,13 @@ export class User {
 
   /**
    * Send a POST request to our signup endpoint with the data
-   * the user entered on the form.
+   * the usuario entered on the form.
    */
   signup(accountInfo: any) {
     let seq = this.api.post('signup', accountInfo).share();
 
     seq.subscribe((res: any) => {
-      // If the API returned a successful response, mark the user as logged in
+      // If the API returned a successful response, mark the usuario as logged in
       if (res.status == 'success') {
         this._loggedIn(res);
       }
@@ -69,16 +75,16 @@ export class User {
   }
 
   /**
-   * Log the user out, which forgets the session
+   * Log the usuario out, which forgets the session
    */
   logout() {
-    this._user = null;
+    this._usuario = null;
   }
 
   /**
-   * Process a login/signup response to store user data
+   * Process a login/signup response to store usuario data
    */
   _loggedIn(resp) {
-    this._user = resp.user;
+    this._usuario = resp.usuario;
   }
 }

@@ -1,7 +1,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>{{ 'SIGNUP_TITLE' | translate }}</ion-title>
+    <ion-title>Criar Usuário</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -12,31 +12,33 @@
     <ion-list>
 
       <ion-item>
-        <ion-label fixed>{{ 'NAME' | translate }}</ion-label>
-        <ion-input type="text" [(ngModel)]="account.name" name="name"></ion-input>
+        <ion-label fixed>Nome</ion-label>
+        <ion-input type="text" [(ngModel)]="usuario.nomeCompleto" name="nomeCompleto"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'EMAIL' | translate }}</ion-label>
-        <ion-input type="email" [(ngModel)]="account.email" name="email"></ion-input>
+        <ion-label fixed>Email</ion-label>
+        <ion-input type="email" [(ngModel)]="usuario.email" name="email"></ion-input>
       </ion-item>
-
-      <!--
-      Want to add a Username? Here you go:
 
       <ion-item>
-        <ion-label floating>Username</ion-label>
-        <ion-input type="text" [(ngModel)]="account.username" name="username"></ion-input>
-      </ion-item>
-      -->
+          <ion-label fixed>Senha</ion-label>
+          <ion-input type="text" [(ngModel)]="usuario.senha" name="senha"></ion-input>
+        </ion-item>
 
       <ion-item>
-        <ion-label fixed>{{ 'PASSWORD' | translate }}</ion-label>
-        <ion-input type="password" [(ngModel)]="account.password" name="password"></ion-input>
+          <ion-label fixed>Celular</ion-label>
+          <ion-input type="text" [(ngModel)]="usuario.celular" name="celular"></ion-input>
       </ion-item>
+
+      <ion-item>
+          <ion-label fixed>Endereco</ion-label>
+          <ion-input type="text" [(ngModel)]="usuario.endereco" name="endereco"></ion-input>
+      </ion-item>
+
 
       <div padding>
-        <button ion-button color="primary" block>{{ 'SIGNUP_BUTTON' | translate }}</button>
+        <button ion-button color="primary" block>CADASTRAR</button>
       </div>
 
     </ion-list>

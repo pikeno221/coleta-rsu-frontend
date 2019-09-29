@@ -3,7 +3,7 @@
 
   "NAME": "Meno",
   "EMAIL": "Email",
-  "USERNAME": "Prihlasovacie meno",
+  "usuarioNAME": "Prihlasovacie meno",
   "PASSWORD": "Heslo",
   "LOGIN": "Prihlásiť",
   "SIGNUP": "Registrovať",

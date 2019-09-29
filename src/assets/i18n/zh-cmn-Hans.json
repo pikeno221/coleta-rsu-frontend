@@ -3,7 +3,7 @@
 
   "NAME": "姓名",
   "EMAIL": "邮箱",
-  "USERNAME": "登录名",
+  "usuarioNAME": "登录名",
   "PASSWORD": "口令",
   "LOGIN": "登 录",
   "SIGNUP": "注 册",

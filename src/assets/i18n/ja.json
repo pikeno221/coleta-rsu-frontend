@@ -3,7 +3,7 @@
 
   "NAME": "名前",
   "EMAIL": "Eメール",
-  "USERNAME": "ユーザー名",
+  "usuarioNAME": "ユーザー名",
   "PASSWORD": "パスワード",
   "LOGIN": "サインイン",
   "SIGNUP": "サインアップ",
