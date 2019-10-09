@@ -68,12 +68,12 @@ export class TutorialPage {
   }
 
   startApp() {
-    /*
+    
     this.navCtrl.setRoot('WelcomePage', {}, {
       animate: true,
       direction: 'forward'
     });
-    */
+    
   }
 
   onSlideChangeStart(slider) {
