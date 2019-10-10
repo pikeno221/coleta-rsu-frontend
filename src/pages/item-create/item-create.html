@@ -27,16 +27,14 @@
   <form *ngIf="form" [formGroup]="form" (ngSubmit)="createItem()">
     
     <ion-list>
-        <ion-item>
-            <ion-input type="date" placeholder="{{ 'ITEM_DATE_PLACEHOLDER' | translate }}" formControlName="dataAgendamento"></ion-input>
-            <ion-datetime displayFormat="DD MMM YYYY H:mm" min="1997" max="2100" placeholder="{{ 'ITEM_DATE_PLACEHOLDER' | translate }}" formControlName="dataAgendamento"></ion-datetime>></ion-datetime>
-          </ion-item>
-          <ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="{{ 'ITEM_NAME_PLACEHOLDER' | translate }}" formControlName="name"></ion-input>
+        <ion-datetime displayFormat="D MMM YYYY H:mm" min="1997" max="2100" placeholder="Data de agendamento" formControlName="dataAgendamento"></ion-datetime>
       </ion-item>
       <ion-item>
-        <ion-input type="text" placeholder="{{ 'ITEM_ABOUT_PLACEHOLDER' | translate }}" formControlName="about"></ion-input>
+        <ion-input type="text" placeholder="Material" formControlName="material"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Observações" formControlName="observacoes"></ion-input>
       </ion-item>
     </ion-list>
   </form>
