@@ -34,6 +34,7 @@ export class LoginPage {
 
   // Attempt to login in through our usuario service
   doLogin() {
+    /*
     this.usuarioService.login(this.usuario).subscribe((resp) => {
       this.navCtrl.push(MainPage);
     }, (err) => {
@@ -46,5 +47,7 @@ export class LoginPage {
       });
       toast.present();
     });
+    */
+   console.log(this.usuario);
   }
 }
