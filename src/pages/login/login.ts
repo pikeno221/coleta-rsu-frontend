@@ -29,7 +29,9 @@ export class LoginPage {
   doLogin() {
     console.log(this.usuario);
     this.usuarioService.login(this.usuario).subscribe((resp) => {
-      this.navCtrl.push(InicioPage);
+      this.navCtrl.push('ItemDetailPage', {
+        usuario: this.usuario
+      });
     }, (err) => {
       let response = new LoginResponse();
       response = err.error;
