@@ -5,8 +5,9 @@ import { Injectable } from '@angular/core';
 import { Api } from '../api/api';
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { Observable } from 'rxjs/Rx';
-import { LoginRequest } from '../../models/login.dto';
+import { LoginRequest } from '../../models/login.request';
 import { HttpHeaders } from '@angular/common/http';
+import { LoginResponse } from '../../models/login.response';
 
 /**
  * Most apps have the concept of a usuario. This is a simple provider
@@ -37,7 +38,7 @@ export class Usuario {
     return this.api.getUsuario();
   }
   
-  login(usuario: LoginRequest) {
+  login(usuario: LoginRequest) : Observable<LoginResponse>{
     const httpOptions = {
       headers: new HttpHeaders({
       'email': usuario.email,
@@ -45,13 +46,9 @@ export class Usuario {
       })
     };
     let seq = this.api.get('usuarios/login', null, httpOptions).share();
-    console.log('seq', seq);
-
-    seq.subscribe((res: any) => {
-      console.log('seq', seq);
-      console.log(res);
+    seq.subscribe((res: LoginResponse) => {
       // If the API returned a successful response, mark the usuario as logged in
-      if (res.status == 'success') {
+      if (res.sucesso) {
         this._loggedIn(res);
       } else {
       }

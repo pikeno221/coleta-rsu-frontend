@@ -1,9 +1,7 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { Usuario } from '../../providers';
-import { MainPage } from '../';
 
 @IonicPage()
 @Component({
@@ -19,17 +17,10 @@ export class LoginPage {
     senha: 'test'
   };
 
-  // Our translated text strings
-  private loginErrorString: string;
-
   constructor(public navCtrl: NavController,
     public usuarioService: Usuario,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
-
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
+    public toastCtrl: ToastController) {
+      
   }
 
   // Attempt to login in through our usuario service
@@ -37,17 +28,15 @@ export class LoginPage {
     console.log(this.usuario);
     this.usuarioService.login(this.usuario).subscribe((resp) => {
       //this.navCtrl.push(MainPage);
-      console.log(resp);
+      console.log('resp -->', resp);
     }, (err) => {
-      //this.navCtrl.push(MainPage);
       // Unable to log in
       let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
+        message: err.error.mensagem,
+        duration: 9000,
         position: 'top'
       });
       toast.present();
-      console.log(err);
     });
     
    

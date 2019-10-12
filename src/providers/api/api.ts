@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
  */
 @Injectable()
 export class Api {
+  any: Observable<any>;
 
   getUsuario(): Observable<UsuarioDTO[]> {
 
@@ -20,7 +21,8 @@ export class Api {
   }
 
   get(endpoint: string, params?: any, reqOpts?: any) {
-    return this.http.get(this.url + '/' + endpoint, reqOpts);
+    this.any = this.http.get(this.url + '/' + endpoint, reqOpts);
+    return this.any;
   }
 
   post(endpoint: string, body: any, reqOpts?: any) {
