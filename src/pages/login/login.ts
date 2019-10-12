@@ -34,11 +34,12 @@ export class LoginPage {
 
   // Attempt to login in through our usuario service
   doLogin() {
-    /*
+    console.log(this.usuario);
     this.usuarioService.login(this.usuario).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      //this.navCtrl.push(MainPage);
+      console.log(resp);
     }, (err) => {
-      this.navCtrl.push(MainPage);
+      //this.navCtrl.push(MainPage);
       // Unable to log in
       let toast = this.toastCtrl.create({
         message: this.loginErrorString,
@@ -46,8 +47,9 @@ export class LoginPage {
         position: 'top'
       });
       toast.present();
+      console.log(err);
     });
-    */
-   console.log(this.usuario);
+    
+   
   }
 }

@@ -5,6 +5,8 @@ import { Injectable } from '@angular/core';
 import { Api } from '../api/api';
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { Observable } from 'rxjs/Rx';
+import { LoginRequest } from '../../models/login.dto';
+import { HttpHeaders } from '@angular/common/http';
 
 /**
  * Most apps have the concept of a usuario. This is a simple provider
@@ -34,21 +36,28 @@ export class Usuario {
   findAll() : Observable<UsuarioDTO[]>{
     return this.api.getUsuario();
   }
-
-  /**
-   * Send a POST request to our login endpoint with the data
-   * the usuario entered on the form.
-   */
-  login(accountInfo: any) {
-    let seq = this.api.post('login', accountInfo).share();
+  
+  login(usuario: LoginRequest) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+      'email': usuario.email,
+        'senha': usuario.senha
+      })
+    };
+    let seq = this.api.get('usuarios/login', null, httpOptions).share();
+    console.log('seq', seq);
 
     seq.subscribe((res: any) => {
+      console.log('seq', seq);
+      console.log(res);
       // If the API returned a successful response, mark the usuario as logged in
       if (res.status == 'success') {
         this._loggedIn(res);
       } else {
       }
     }, err => {
+      console.log('seq', seq);
+      console.log('-->', err.error.mensagem);
       console.error('ERROR', err);
     });
 

@@ -90,7 +90,6 @@ export class TutorialPage {
     error => {
       console.log(error);
     })
-    console.log(this.usuarioService.findAll());
   }
 
   ionViewWillLeave() {
