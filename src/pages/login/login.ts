@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { Usuario } from '../../providers';
+import { InicioPage } from '../inicio/inicio';
+import { LoginResponse } from '../../models/login.response';
 
 @IonicPage()
 @Component({
@@ -27,18 +29,20 @@ export class LoginPage {
   doLogin() {
     console.log(this.usuario);
     this.usuarioService.login(this.usuario).subscribe((resp) => {
-      //this.navCtrl.push(MainPage);
-      console.log('resp -->', resp);
+      this.navCtrl.push(InicioPage);
     }, (err) => {
-      // Unable to log in
+      let response = new LoginResponse();
+      response = err.error;
+      if (err.status == 0) {
+        response.mensagem = 'Error ao se comunicar com o servidor';   
+      }
       let toast = this.toastCtrl.create({
-        message: err.error.mensagem,
+        message: response.mensagem,
         duration: 9000,
         position: 'top'
       });
       toast.present();
     });
-    
    
   }
 }

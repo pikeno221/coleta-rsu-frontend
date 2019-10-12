@@ -1,7 +1,12 @@
 import { UsuarioDTO } from "./usuario.dto";
 
-export interface LoginResponse {
+export class LoginResponse {
     mensagem: string;
-    sucesso: string;
+    sucesso: boolean;
     usuario: UsuarioDTO;
-    }
+}
+
+
+
+
+  
