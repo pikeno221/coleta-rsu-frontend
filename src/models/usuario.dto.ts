@@ -5,5 +5,6 @@ export interface UsuarioDTO {
     senha: string;
     celular: string;
     endereco: string;
-    statusUsuario: string
+    statusUsuario: string;
+    tipoPessoa: string
 }
