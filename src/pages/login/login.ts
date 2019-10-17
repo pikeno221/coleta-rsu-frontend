@@ -34,20 +34,20 @@ export class LoginPage {
 
   // Attempt to login in through our usuario service
   doLogin() {
-    /*
+    
     this.usuarioService.login(this.usuario).subscribe((resp) => {
       this.navCtrl.push(MainPage);
     }, (err) => {
       this.navCtrl.push(MainPage);
       // Unable to log in
-      let toast = this.toastCtrl.create({
-        message: this.loginErrorString,
-        duration: 3000,
-        position: 'top'
-      });
-      toast.present();
+      // let toast = this.toastCtrl.create({
+      //   message: this.loginErrorString,
+      //   duration: 3000,
+      //   position: 'top'
+      // });
+     // toast.present();
     });
-    */
+    
    console.log(this.usuario);
   }
 }

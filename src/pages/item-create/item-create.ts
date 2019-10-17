@@ -2,6 +2,9 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController } from 'ionic-angular';
+import { ColetaProvider } from '../../providers/coleta/coleta';
+// import { Coleta } from '../../providers';
+// import { TranslateService } from '@ngx-translate/core';
 
 @IonicPage()
 @Component({
@@ -17,12 +20,13 @@ export class ItemCreatePage {
 
   form: FormGroup;
 
-  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera) {
+  constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, public coleta: ColetaProvider) {
     this.form = formBuilder.group({
       material: ['', Validators.required],
       observacoes: [''],
       dataAgendamento: ['', Validators.required]
     });
+    
 
     // Watch the form for changes, and
     this.form.valueChanges.subscribe((v) => {
@@ -32,37 +36,6 @@ export class ItemCreatePage {
 
   ionViewDidLoad() {
 
-  }
-
-  getPicture() {
-    if (Camera['installed']()) {
-      this.camera.getPicture({
-        destinationType: this.camera.DestinationType.DATA_URL,
-        targetWidth: 96,
-        targetHeight: 96
-      }).then((data) => {
-        this.form.patchValue({ 'profilePic': 'data:image/jpg;base64,' + data });
-      }, (err) => {
-        alert('Unable to take photo');
-      })
-    } else {
-      this.fileInput.nativeElement.click();
-    }
-  }
-
-  processWebImage(event) {
-    let reader = new FileReader();
-    reader.onload = (readerEvent) => {
-
-      let imageData = (readerEvent.target as any).result;
-      this.form.patchValue({ 'profilePic': imageData });
-    };
-
-    reader.readAsDataURL(event.target.files[0]);
-  }
-
-  getProfileImageStyle() {
-    return 'url(' + this.form.controls['profilePic'].value + ')'
   }
 
   /**
@@ -78,6 +51,10 @@ export class ItemCreatePage {
    */
   done() {
     if (!this.form.valid) { return; }
+    this.form.value['idUsuario'] = window.localStorage.getItem('idUsuario');
+    this.form.value['situacao'] = 'Aguardando confirmação';
+    console.log(this.form.value);
+    this.coleta.salvarColeta(this.form.value);
     this.viewCtrl.dismiss(this.form.value);
   }
 }
