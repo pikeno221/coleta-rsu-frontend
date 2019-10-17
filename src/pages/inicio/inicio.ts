@@ -9,9 +9,9 @@ import { ColetaProvider } from '../../providers/coleta/coleta';
 @IonicPage()
 @Component({
   selector: 'page-item-create',
-  templateUrl: 'item-create.html'
+  templateUrl: 'inicio.html'
 })
-export class ItemCreatePage {
+export class InicioPage {
   @ViewChild('fileInput') fileInput;
 
   isReadyToSave: boolean;
@@ -35,6 +35,7 @@ export class ItemCreatePage {
   }
 
   ionViewDidLoad() {
+    console.log('passou1');
 
   }
 

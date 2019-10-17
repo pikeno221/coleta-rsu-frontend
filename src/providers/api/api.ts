@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UsuarioDTO } from '../../models/usuario.dto';
 import { Observable } from 'rxjs';
@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
  */
 @Injectable()
 export class Api {
+  any: Observable<any>;
 
   getUsuario(): Observable<UsuarioDTO[]> {
 
@@ -20,21 +21,8 @@ export class Api {
   }
 
   get(endpoint: string, params?: any, reqOpts?: any) {
-    if (!reqOpts) {
-      reqOpts = {
-        params: new HttpParams()
-      };
-    }
-
-    // Support easy query params for GET requests
-    if (params) {
-      reqOpts.params = new HttpParams();
-      for (let k in params) {
-        reqOpts.params = reqOpts.params.set(k, params[k]);
-      }
-    }
-
-    return this.http.get(this.url + '/' + endpoint, reqOpts);
+    this.any = this.http.get(this.url + '/' + endpoint, reqOpts);
+    return this.any;
   }
 
   post(endpoint: string, body: any, reqOpts?: any) {

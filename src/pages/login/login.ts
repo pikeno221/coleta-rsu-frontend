@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { Usuario } from '../../providers';
-import { MainPage } from '../';
+import { InicioPage } from '../inicio/inicio';
+import { LoginResponse } from '../../models/login.response';
 
 @IonicPage()
 @Component({
@@ -19,35 +19,32 @@ export class LoginPage {
     senha: 'test'
   };
 
-  // Our translated text strings
-  private loginErrorString: string;
-
   constructor(public navCtrl: NavController,
     public usuarioService: Usuario,
-    public toastCtrl: ToastController,
-    public translateService: TranslateService) {
-
-    this.translateService.get('LOGIN_ERROR').subscribe((value) => {
-      this.loginErrorString = value;
-    })
+    public toastCtrl: ToastController) {
+      
   }
 
   // Attempt to login in through our usuario service
   doLogin() {
-    
+    console.log(this.usuario);
     this.usuarioService.login(this.usuario).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push('ItemDetailPage', {
+        usuario: this.usuario
+      });
     }, (err) => {
-      this.navCtrl.push(MainPage);
-      // Unable to log in
-      // let toast = this.toastCtrl.create({
-      //   message: this.loginErrorString,
-      //   duration: 3000,
-      //   position: 'top'
-      // });
-     // toast.present();
+      let response = new LoginResponse();
+      response = err.error;
+      if (err.status == 0) {
+        response.mensagem = 'Error ao se comunicar com o servidor';   
+      }
+      let toast = this.toastCtrl.create({
+        message: response.mensagem,
+        duration: 9000,
+        position: 'top'
+      });
+      toast.present();
     });
-    
-   console.log(this.usuario);
+   
   }
 }
