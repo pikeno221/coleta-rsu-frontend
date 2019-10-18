@@ -35,15 +35,22 @@ export class LoginPage {
     }, (err) => {
       let response = new LoginResponse();
       response = err.error;
+      this.navCtrl.push('TabsPage', {
+        usuario: this.usuario
+      });
       if (err.status == 0) {
         response.mensagem = 'Error ao se comunicar com o servidor';   
+        //temporário pra trabalhar
+        this.navCtrl.push('TabsPage', {
+          usuario: this.usuario
+        });
       }
-      let toast = this.toastCtrl.create({
-        message: response.mensagem,
-        duration: 9000,
-        position: 'top'
-      });
-      toast.present();
+      // let toast = this.toastCtrl.create({
+      //   message: response.mensagem,
+      //   duration: 9000,
+      //   position: 'top'
+      // });
+     // toast.present();
     });
    
   }

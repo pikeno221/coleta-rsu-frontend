@@ -15,7 +15,7 @@ export class Api {
     return this.http.get<UsuarioDTO[]>(this.url + '/usuarios');
     
   }
-  url: string = 'http://localhost:8081';
+  url: string = 'https://projeto-coleta-rsu-backend.herokuapp.com';
 
   constructor(public http: HttpClient) {
   }
