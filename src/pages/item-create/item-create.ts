@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Camera } from '@ionic-native/camera';
 import { IonicPage, NavController, ViewController } from 'ionic-angular';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
+
 // import { Coleta } from '../../providers';
 // import { TranslateService } from '@ngx-translate/core';
 
@@ -22,9 +23,9 @@ export class ItemCreatePage {
 
   constructor(public navCtrl: NavController, public viewCtrl: ViewController, formBuilder: FormBuilder, public camera: Camera, public agendamento: AgendamentoProvider) {
     this.form = formBuilder.group({
-      material: ['', Validators.required],
-      observacoes: [''],
-      dataAgendamento: ['', Validators.required]
+      materiaisColeta: ['', Validators.required],
+      observacoesUsuario: [''],
+      dataAgendada: ['', Validators.required]
     });
     
 
@@ -54,6 +55,7 @@ export class ItemCreatePage {
     this.form.value['usuario'] = window.localStorage.getItem('idUsuario');
     //this.form.value['situacao'] = 'pendente';
     console.log(this.form.value);
+
     this.agendamento.salvarAgendamento(this.form.value);
     this.viewCtrl.dismiss(this.form.value);
   }

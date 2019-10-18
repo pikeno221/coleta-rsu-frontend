@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Api } from '../api/api';
 
@@ -12,20 +12,20 @@ import { Api } from '../api/api';
 export class AgendamentoProvider {
   
   constructor(public api: Api) { }
-
-  buscarTodos() {
-    let seq = this.api.get('agendamento');
-
-    seq.subscribe((res: any) =>{
-        if (res.status == 'success') {
-            return res;
-        } else {
-        }
-      }, err => {
-        console.error('ERROR', err);
-      });
   
-      return seq;
+
+  buscarTodos(idUsuario: number, tokenUsuario: string) {
+
+    var header = {
+      headers: new HttpHeaders()
+        .set('token', tokenUsuario)
+     }
+     
+    return this.api.get(`agendamentos/usuarios/${idUsuario}`, null, header ).map(res => {
+         
+        return res;
+    })
+
     
     }
   

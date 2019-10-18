@@ -18,9 +18,9 @@
     <ion-list>
       <ion-item-sliding *ngFor="let item of currentItems">
         <ion-item (click)="openItem(item)">
-          <p>{{item.dataAgendamento}}</p>
-          <p>{{item.material}}</p>
-          <p>{{item.observacoes}}</p>
+          <p>{{item.dataAgendada}}</p>
+          <p>{{item.materiaisColeta}}</p>
+          <p>{{item.observacoesUsuario}}</p>
           <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
         </ion-item>
              <ion-item-options>

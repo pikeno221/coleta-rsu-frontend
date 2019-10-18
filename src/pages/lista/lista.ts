@@ -3,6 +3,8 @@ import { IonicPage, ModalController, NavController } from 'ionic-angular';
 import { Item } from '../../models/item';
 import { Items } from '../../providers';
 import { ListaPendentesPage } from '../lista-pendentes/lista-pendentes';
+import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
+
 
  
 
@@ -14,8 +16,18 @@ import { ListaPendentesPage } from '../lista-pendentes/lista-pendentes';
 export class ListaPage {
 
   currentItems: Item[];
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController) {
-    this.currentItems = this.items.query();
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, public agendamento: AgendamentoProvider) {
+    var so1Item = this.agendamento.buscarTodos(101, '123').subscribe(data => {
+      debugger;
+      for (let index = 0; index < data.agendamentos.length; index++) {
+        const element = data.agendamentos[index];
+        if(element.status == 'AGUARDANDO_CONFICAMACAO'){
+          this.items.add(element);
+        }        
+      }
+      this.currentItems = data.agendamentos;
+    });
+    // this.currentItems = this.items.query();
   }
   /**
    * The view loaded, let's query our items for the list

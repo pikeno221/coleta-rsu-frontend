@@ -15,8 +15,8 @@ export class LoginPage {
   // If you're using the usuarioname field with or without email, make
   // sure to add it to the type
   usuario: { email: string, senha: string } = {
-    email: 'test@example.com',
-    senha: 'test'
+    email: 'wesley@teste.com.br',
+    senha: '123'
   };
 
   constructor(public navCtrl: NavController,
@@ -29,28 +29,21 @@ export class LoginPage {
   doLogin() {
     console.log(this.usuario);
     this.usuarioService.login(this.usuario).subscribe((resp) => {
-      this.navCtrl.push('ItemDetailPage', {
+      this.navCtrl.push('TabsPage', {
         usuario: this.usuario
       });
     }, (err) => {
       let response = new LoginResponse();
       response = err.error;
-      this.navCtrl.push('TabsPage', {
-        usuario: this.usuario
-      });
       if (err.status == 0) {
         response.mensagem = 'Error ao se comunicar com o servidor';   
-        //temporário pra trabalhar
-        this.navCtrl.push('TabsPage', {
-          usuario: this.usuario
-        });
       }
-      // let toast = this.toastCtrl.create({
-      //   message: response.mensagem,
-      //   duration: 9000,
-      //   position: 'top'
-      // });
-     // toast.present();
+      let toast = this.toastCtrl.create({
+        message: response.mensagem,
+        duration: 9000,
+        position: 'top'
+      });
+     toast.present();
     });
    
   }
