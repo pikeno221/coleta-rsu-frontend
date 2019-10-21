@@ -13,15 +13,16 @@ export class AgendamentoProvider {
   
   constructor(public api: Api) { }
   
+  private header = {
+    headers: new HttpHeaders()
+      .set('token', "123")
+   }
 
   buscarTodos(idUsuario: number, tokenUsuario: string) {
 
-    var header = {
-      headers: new HttpHeaders()
-        .set('token', tokenUsuario)
-     }
+    
      
-    return this.api.get(`agendamentos/usuarios/${idUsuario}`, null, header ).map(res => {
+    return this.api.get(`agendamentos/usuarios/${idUsuario}`, null, this.header ).map(res => {
          
         return res;
     })
@@ -31,28 +32,26 @@ export class AgendamentoProvider {
   
 
     salvarAgendamento(agendamentoInfo: any) {
+      
     let seq = this.api.post('agendamentos', agendamentoInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the o agendamento as realizado
-      if (res.status == 'success') {
-          console.log('sucesso')
-          return res;
-      } else {
-        console.log('erro');
-        return {
-dataAgendamento: '2019-10-11T22:20:00Z',
-idUsuario: '1',
-material: 'asdffdsa',
-observacoes: 'oçiasidjfçlajkdfçlakjçldfsjlçjfalç',
-situacao: 'Aguardando confirmação'
-        }
-      }
+      return res
     }, err => {
       console.error('ERROR', err);
     });
 
     return seq;
+  }
+  CancelarAgendamento(agendamento:any){
+    let seq = this.api.post(`agendamentos`, agendamento).share();
+    seq.subscribe(res => {
+         
+      return res;
+  },err => {
+    console.error('ERROR', err);
+  })
   }
 
 }

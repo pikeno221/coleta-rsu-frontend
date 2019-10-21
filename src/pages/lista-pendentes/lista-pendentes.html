@@ -1,34 +1,22 @@
-<!--
-  Generated template for the ListaPendentesPage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-<ion-content padding>
-  <ion-header>
-    <ion-navbar>
-      <ion-buttons end>
-        <button ion-button icon-only (click)="addItem()">
-          <ion-icon name="add"></ion-icon>
-        </button>
-      </ion-buttons>
-    </ion-navbar>
-   </ion-header>
-   <ion-content>
-    <ion-list>
-      <ion-item-sliding *ngFor="let item of currentItems">
-        <ion-item (click)="openItem(item)">
-          <p>{{item.dataAgendamento}}</p>
-          <p>{{item.material}}</p>
-          <p>{{item.observacoes}}</p>
-          <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
-        </ion-item>
-             <ion-item-options>
-          <button ion-button color="danger" (click)="deleteItem(item)">
-            Cancelar
-          </button>
-        </ion-item-options>
-      </ion-item-sliding>
-    </ion-list>
-   </ion-content>
+<ion-header>
+<ion-navbar>
+  
+</ion-navbar>
+</ion-header>
+<ion-content>
+<ion-list>
+  <ion-item-sliding *ngFor="let item of currentItems">
+    <ion-item (click)="openItem(item)">
+      <p>{{item.dataAgendada}}</p>
+      <p>{{item.materiaisColeta}}</p>
+      <p>{{item.observacoesUsuario}}</p>
+      <ion-note item-end *ngIf="item.note">{{item.note}}</ion-note>
+    </ion-item>
+          <ion-item-options>
+      <button ion-button color="danger" (click)="deleteItem(item)">
+        Cancelar
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
 </ion-content>

@@ -8,6 +8,7 @@ import { Observable } from 'rxjs/Rx';
 import { LoginRequest } from '../../models/login.request';
 import { HttpHeaders } from '@angular/common/http';
 import { LoginResponse } from '../../models/login.response';
+import { JsonPipe } from '@angular/common';
 
 /**
  * Most apps have the concept of a usuario. This is a simple provider
@@ -49,6 +50,7 @@ export class Usuario {
     seq.subscribe((res: LoginResponse) => {
       // If the API returned a successful response, mark the usuario as logged in
       if (res.sucesso) {
+        window.sessionStorage.setItem("login", JSON.stringify(res))
         this._loggedIn(res);
       } else {
       }
@@ -84,6 +86,7 @@ export class Usuario {
    * Log the usuario out, which forgets the session
    */
   logout() {
+    window.sessionStorage.removeItem("login")
     this._usuario = null;
   }
 
