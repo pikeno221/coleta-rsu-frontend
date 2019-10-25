@@ -6,6 +6,8 @@ import { Tab1Root, Tab2Root, Tab3Root } from '../';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
 import { ListaPendentesPage } from '../lista-pendentes/lista-pendentes';
 import { Usuario, Items } from '../../providers';
+import { ListaPage } from '../lista/lista';
+import { ListaCanceladasPage } from '../lista-canceladas/lista-canceladas';
 
 @IonicPage()
 @Component({
@@ -37,9 +39,16 @@ export class TabsPage {
     addModal.onDidDismiss(item => {
       this.agendamento.salvarAgendamento(item);
       var listaItemPendente = new Items();  
-      var listaPendente = new ListaPendentesPage(this.navCtrl, listaItemPendente , this.modalCtrl, this.agendamento, this.usuario);
-      listaPendente.BindList();
+      //var listaPendente = new ListaPendentesPage(this.navCtrl, listaItemPendente , this.modalCtrl, this.agendamento, this.usuario);
+      debugger;
+      let teste = this.navCtrl.getAllChildNavs()
+      if (teste[0]._tabs[1]._views){
+        teste[0]._tabs[1]._views[0].instance.BindList()
+      }
+      //;
     })
     addModal.present();
   }
+
+  
 }

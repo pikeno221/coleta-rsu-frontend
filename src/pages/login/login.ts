@@ -15,18 +15,22 @@ export class LoginPage {
   // If you're using the usuarioname field with or without email, make
   // sure to add it to the type
   usuario: { email: string, senha: string } = {
-    email: 'wesley@teste.com.br',
+    email: 'wesley@gmail.com',
     senha: '123'
   };
 
   constructor(public navCtrl: NavController,
     public usuarioService: Usuario,
     public toastCtrl: ToastController) {
-      
+      debugger;
+      var skiped = window.localStorage.getItem("skiped");
+      if (skiped == undefined)
+      {
+        this.navCtrl.push('TutorialPage');
+      }      
   }
   ionViewDidLoad() {
-    debugger;
-    let usuario = window.sessionStorage.getItem("login");
+    let usuario = window.localStorage.getItem("login");
 
       if (usuario){
         usuario = JSON.parse(usuario).usuario;

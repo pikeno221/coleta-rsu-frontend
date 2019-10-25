@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
-import { Settings, Usuario } from '../../providers';
+import { Settings, Usuario, Items } from '../../providers';
 import { Item } from '../../models/item';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
 import { TabsPage } from '../tabs/tabs';
+import { ListaPage } from '../lista/lista';
+import { ListaPendentesPage } from '../lista-pendentes/lista-pendentes';
 
 /**
  * The Settings page is a simple form that syncs with a Settings provider
@@ -22,15 +24,9 @@ export class ListaCanceladasPage {
 
   currentItems: Item[] = [];
   constructor(public navCtrl: NavController,
-    public settings: Settings,
-    public formBuilder: FormBuilder,
-    public navParams: NavParams,
-    public translate: TranslateService,
     public agendamento:AgendamentoProvider,
-    public usuario: Usuario,
-    public tabs: TabsPage) {
+    public usuario: Usuario, public modalCtrl: ModalController) {
       this.BindList();
-    
     }
   
     ionViewDidLoad() {
@@ -47,8 +43,26 @@ export class ListaCanceladasPage {
           }        
       }
       },err =>{
-        this.tabs.addItem()
       });
+    }
+    deleteItem(item) {
+    
+      console.log(item)
+      item.status = "CANCELADO"
+      item.usuario = item.usuario.id
+      this.agendamento.CancelarAgendamento(item);
+      //this.currentItems.splice(this.currentItems.indexOf(item), 1);
+      var listaItemPendente = new Items();  
+      var listaPendente = new ListaPendentesPage(this.navCtrl, listaItemPendente , this.modalCtrl, this.agendamento, this.usuario);
+      listaPendente.BindList();
+  
+      var listaItemConcluido = new Items();  
+      var listaConcluido = new ListaPage(this.navCtrl, listaItemConcluido , this.modalCtrl, this.agendamento, this.usuario);
+      listaConcluido.BindList();
+    
+      this.BindList();
+  
+      
     }
   
     public openItem(item: Item) {

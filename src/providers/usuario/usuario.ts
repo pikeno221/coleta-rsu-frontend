@@ -50,7 +50,8 @@ export class Usuario {
     seq.subscribe((res: LoginResponse) => {
       // If the API returned a successful response, mark the usuario as logged in
       if (res.sucesso) {
-        window.sessionStorage.setItem("login", JSON.stringify(res))
+        
+        window.localStorage.setItem("login", JSON.stringify(res))
         this._loggedIn(res);
       } else {
       }

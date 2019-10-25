@@ -4,6 +4,8 @@ import { Item } from '../../models/item';
 import { Items, Usuario } from '../../providers';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
 import { TabsPage } from '../tabs/tabs';
+import { ListaPage } from '../lista/lista';
+import { ListaCanceladasPage } from '../lista-canceladas/lista-canceladas';
 
 
 /**
@@ -43,6 +45,24 @@ export class ListaPendentesPage {
       //this.tabs.addItem()
     });
   }
+  deleteItem(item) {
+    
+    console.log(item)
+    item.status = "CANCELADO"
+    item.usuario = item.usuario.id
+    this.agendamento.CancelarAgendamento(item);
+    //this.currentItems.splice(this.currentItems.indexOf(item), 1);
+    this.currentItems.splice(this.currentItems.indexOf(item), 1);
+
+    var listaItemConcluido = new Items();  
+    var listaConcluido = new ListaPage(this.navCtrl, listaItemConcluido , this.modalCtrl, this.agendamento, this.usuario);
+    listaConcluido.BindList();
+
+    var listaCancelado = new ListaCanceladasPage(this.navCtrl, this.agendamento, this.usuario, this.modalCtrl);
+    listaCancelado.BindList();
+
+    
+  }
 
   public openItem(item: Item) {
     this.navCtrl.push('ItemDetailPage', {
@@ -50,16 +70,7 @@ export class ListaPendentesPage {
     });
   }
   // cancela agendamento
-  public deleteItem(item) {
-    
-    console.log(item)
-    item.status = "CANCELADO"
-    item.usuario = item.usuario.id
-    this.agendamento.CancelarAgendamento(item);
-    this.currentItems.splice(this.currentItems.indexOf(item), 1);
-    
-    
-  }
+
   // cria novo agendamento
   // public addItem(){
   //   let addModal = this.modalCtrl.create('ItemCreatePage');

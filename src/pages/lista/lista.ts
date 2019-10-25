@@ -21,8 +21,7 @@ export class ListaPage {
     public items: Items, 
     public modalCtrl: ModalController, 
     public agendamento: AgendamentoProvider,
-    public usuario: Usuario,
-    public tabs: TabsPage) {
+    public usuario: Usuario) {
     this.BindList();
     this.currentItems = this.items.query();
   }
@@ -45,7 +44,6 @@ export class ListaPage {
         }        
     }
     },err =>{
-      this.tabs.addItem()
     });
   }
   // cancela agendamento

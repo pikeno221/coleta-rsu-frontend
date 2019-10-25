@@ -45,13 +45,13 @@ export class AgendamentoProvider {
     return seq;
   }
   CancelarAgendamento(agendamento:any){
-    let seq = this.api.post(`agendamentos`, agendamento).share();
+    let seq = this.api.patch(`agendamentos/${agendamento.id}`, {statusColeta: agendamento.status},this.header).share();
     seq.subscribe(res => {
          
       return res;
   },err => {
     console.error('ERROR', err);
   })
-  }
+    }
 
 }
