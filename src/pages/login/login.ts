@@ -24,10 +24,22 @@ export class LoginPage {
     public toastCtrl: ToastController) {
       
   }
+  ionViewDidLoad() {
+    debugger;
+    let usuario = window.sessionStorage.getItem("login");
 
+      if (usuario){
+        usuario = JSON.parse(usuario).usuario;
+        console.log(usuario)
+      
+        this.usuarioService._usuario = usuario;
+        this.navCtrl.push('TabsPage', {
+          usuario: usuario
+        });
+      }
+  }
   // Attempt to login in through our usuario service
   doLogin() {
-    console.log(this.usuario);
     this.usuarioService.login(this.usuario).subscribe((resp) => {
       this.navCtrl.push('TabsPage', {
         usuario: this.usuario
