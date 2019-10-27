@@ -6,6 +6,11 @@ import { Tab1Root, Tab2Root, Tab3Root } from '../';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
 import { ListaPendentesPage } from '../lista-pendentes/lista-pendentes';
 import { Usuario, Items } from '../../providers';
+<<<<<<< HEAD
+=======
+import { ListaPage } from '../lista/lista';
+import { ListaCanceladasPage } from '../lista-canceladas/lista-canceladas';
+>>>>>>> 82dca1432a1eff3d1e2b319af325eebd88f6cbef
 
 @IonicPage()
 @Component({
