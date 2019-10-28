@@ -2,11 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, ModalController, NavController } from 'ionic-angular';
 import { Item } from '../../models/item';
 import { Items, Usuario } from '../../providers';
-import { ListaPendentesPage } from '../lista-pendentes/lista-pendentes';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
 import { TabsPage } from '../tabs/tabs';
-
-
  
 
 @IonicPage()
@@ -40,7 +37,7 @@ export class ListaPage {
     this.agendamento.buscarTodos(this.usuario._usuario.id, '123').subscribe(data => {
       for (let index = 0; index < data.agendamentos.length; index++) {
         const element = data.agendamentos[index];
-        if(element.status == 'CONFIRMADOS'){
+        if(element.status == 'AGENDAMENTO_CONFIRMADO'){
           this.currentItems.push(element);
         }        
     }

@@ -9,3 +9,9 @@ export const MainPage = 'TabsPage';
 export const Tab1Root = 'ListaPage';
 export const Tab2Root = 'ListaPendentesPage';
 export const Tab3Root = 'ListaCanceladasPage';
+export const Tab4Root = 'ListaConcluidosPage';
+
+export const Tab1RootAdmin = 'ListaAdminPage';
+export const Tab2RootAdmin = 'ListaAdminPendentesPage';
+export const Tab3RootAdmin = 'ListaAdminCanceladasPage';
+export const Tab4RootAdmin = 'ListaAdminConcluidosPage';

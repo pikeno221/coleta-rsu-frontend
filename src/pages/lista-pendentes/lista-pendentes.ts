@@ -4,11 +4,6 @@ import { Item } from '../../models/item';
 import { Items, Usuario } from '../../providers';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
 import { TabsPage } from '../tabs/tabs';
-<<<<<<< HEAD
-=======
-import { ListaPage } from '../lista/lista';
-import { ListaCanceladasPage } from '../lista-canceladas/lista-canceladas';
->>>>>>> 82dca1432a1eff3d1e2b319af325eebd88f6cbef
 
 
 /**
@@ -48,14 +43,7 @@ export class ListaPendentesPage {
       //this.tabs.addItem()
     });
   }
-  deleteItem(item) {
-    
-    console.log(item)
-    item.status = "CANCELADO"
-    item.usuario = item.usuario.id
-    this.agendamento.CancelarAgendamento(item);
-    //this.currentItems.splice(this.currentItems.indexOf(item), 1);
-    this.currentItems.splice(this.currentItems.indexOf(item), 1);
+
 
   public openItem(item: Item) {
     this.navCtrl.push('ItemDetailPage', {

@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addItem()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+ </ion-header>
+<ion-tabs>
+  <ion-tab [root]="tab1RootAdmin" [tabTitle]="tab1Title" tabIcon="checkbox-outline"></ion-tab>
+  <ion-tab [root]="tab2RootAdmin" [tabTitle]="tab2Title" tabIcon="alert"></ion-tab>
+  <ion-tab [root]="tab3RootAdmin" [tabTitle]="tab3Title" tabIcon="close"></ion-tab>
+  <ion-tab [root]="tab4RootAdmin" [tabTitle]="tab4Title" tabIcon="checkmark"></ion-tab>
+</ion-tabs>

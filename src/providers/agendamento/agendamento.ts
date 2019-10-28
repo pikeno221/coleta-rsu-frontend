@@ -29,6 +29,12 @@ export class AgendamentoProvider {
 
     
     }
+
+    buscarTodosAdmin() {
+      return this.api.get(`agendamentos`, null, this.header ).map(res => {
+          return res;
+      })
+    }
   
 
     salvarAgendamento(agendamentoInfo: any) {

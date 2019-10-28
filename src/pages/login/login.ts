@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { Usuario } from '../../providers';
-import { InicioPage } from '../inicio/inicio';
 import { LoginResponse } from '../../models/login.response';
 
 @IonicPage()
@@ -22,7 +21,6 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public usuarioService: Usuario,
     public toastCtrl: ToastController) {
-      debugger;
       var skiped = window.localStorage.getItem("skiped");
       if (skiped == undefined)
       {
@@ -30,7 +28,6 @@ export class LoginPage {
       }      
   }
   ionViewDidLoad() {
-    debugger;
     let usuario = window.sessionStorage.getItem("login");
 
       if (usuario){
@@ -38,7 +35,7 @@ export class LoginPage {
         console.log(usuario)
       
         this.usuarioService._usuario = usuario;
-        this.navCtrl.push('TabsPage', {
+        this.navCtrl.push('TabsAdminPage', {
           usuario: usuario
         });
       }
@@ -46,7 +43,7 @@ export class LoginPage {
   // Attempt to login in through our usuario service
   doLogin() {
     this.usuarioService.login(this.usuario).subscribe((resp) => {
-      this.navCtrl.push('TabsPage', {
+      this.navCtrl.push('TabsAdminPage', {
         usuario: this.usuario
       });
     }, (err) => {
