@@ -20,6 +20,7 @@ import { TabsAdminPage } from '../tabs-admin/tabs-admin';
 export class ListaAdminConcluidosPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public usuario: Usuario, public agendamento: AgendamentoProvider, public tabs:TabsAdminPage) {
+    this.BindList()
   }
   currentItems: Item[] = [];
   ionViewDidLoad() {
@@ -31,7 +32,7 @@ export class ListaAdminConcluidosPage {
       this.agendamento.buscarTodosAdmin().subscribe(data => {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
-          if(element.status == 'Conclido'){
+          if(element.status == 'CONCLUIDO'){
             this.currentItems.push(element);
           }        
       }
@@ -41,7 +42,7 @@ export class ListaAdminConcluidosPage {
     }
   
     public openItem(item: Item) {
-      this.navCtrl.push('ItemDetailPage', {
+      this.navCtrl.push('ItemAdminDetailPage', {
         item: item
       });
     }

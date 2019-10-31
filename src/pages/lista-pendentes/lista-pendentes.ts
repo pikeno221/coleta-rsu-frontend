@@ -19,6 +19,10 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'lista-pendentes.html',
 })
 export class ListaPendentesPage {
+  data: { dataAgendada: string, dataAgendadaFim: string} = {
+    dataAgendada: '01/01/2019',
+    dataAgendadaFim: '01/12/2019'
+  };
   currentItems: Item[] = [];
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, 
     public agendamento: AgendamentoProvider, public usuario: Usuario) {
@@ -32,7 +36,7 @@ export class ListaPendentesPage {
 
   public BindList()
   {
-    this.agendamento.buscarTodos(this.usuario._usuario.id, '123').subscribe(data => {
+    this.agendamento.buscarTodos(this.usuario._usuario.id, this.data.dataAgendada, this.data.dataAgendadaFim, "AGUARDANDO_CONFICAMACAO").subscribe(data => {
       for (let index = 0; index < data.agendamentos.length; index++) {
         const element = data.agendamentos[index];
         if(element.status == 'AGUARDANDO_CONFICAMACAO'){

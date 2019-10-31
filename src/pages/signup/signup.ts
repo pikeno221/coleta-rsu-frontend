@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { IonicPage, NavController, ToastController } from 'ionic-angular';
 
 import { Usuario } from '../../providers';
-import { MainPage } from '../';
+import { MainPage, FirstRunPage  } from '../';
 
 @IonicPage()
 @Component({
@@ -14,12 +14,14 @@ export class SignupPage {
   // The account fields for the login form.
   // If you're using the usuarioname field with or without email, make
   // sure to add it to the type
-  usuario: { nomeCompleto: string, email: string, senha: string, celular: string, endereco: string } = {
+  usuario: { nomeCompleto: string, email: string, senha: string, celular: string, endereco: string, tipoPessoa: string, statusUsuario:string } = {
     nomeCompleto: 'teste',
     email: 'test@example.com',
     senha: 'test',
     celular: '+55 (31)98454-8992',
-    endereco: 'Rua teste, 45, Bairro teste'
+    endereco: 'Rua teste, 45, Bairro teste',
+    tipoPessoa: "PESSOA_FISICA",
+    statusUsuario: "PENDENTE_APROVACAO",
   };
 
   // Our translated text strings
@@ -38,10 +40,10 @@ export class SignupPage {
   doSignup() {
     // Attempt to login in through our usuario service
     this.usuarioService.signup(this.usuario).subscribe((resp) => {
-      this.navCtrl.push(MainPage);
+      this.navCtrl.push(FirstRunPage);
     }, (err) => {
 
-      this.navCtrl.push(MainPage);
+      //this.navCtrl.push(MainPage);
 
       // Unable to sign up
       let toast = this.toastCtrl.create({

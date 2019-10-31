@@ -18,7 +18,10 @@ import { Item } from '../../models/item';
   templateUrl: 'lista-concluidos.html',
 })
 export class ListaConcluidosPage {
-
+  data: { dataAgendada: string, dataAgendadaFim: string} = {
+    dataAgendada: '01/01/2019',
+    dataAgendadaFim: '01/12/2019'
+  };
   constructor(public navCtrl: NavController, public navParams: NavParams, public usuario: Usuario, public agendamento: AgendamentoProvider, public tabs:TabsPage) {
   }
   currentItems: Item[] = [];
@@ -28,10 +31,10 @@ export class ListaConcluidosPage {
 
   public BindList()
     {
-      this.agendamento.buscarTodos(this.usuario._usuario.id, '123').subscribe(data => {
+      this.agendamento.buscarTodos(this.usuario._usuario.id,  this.data.dataAgendada, this.data.dataAgendadaFim,"CONCLUIDO").subscribe(data => {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
-          if(element.status == 'Conclido'){
+          if(element.status == 'CONCLUIDO'){
             this.currentItems.push(element);
           }        
       }

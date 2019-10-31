@@ -68,13 +68,11 @@ export class Usuario {
    * the usuario entered on the form.
    */
   signup(accountInfo: any) {
-    let seq = this.api.post('signup', accountInfo).share();
+    let seq = this.api.post('usuarios', accountInfo).share();
 
     seq.subscribe((res: any) => {
       // If the API returned a successful response, mark the usuario as logged in
-      if (res.status == 'success') {
-        this._loggedIn(res);
-      }
+      
     }, err => {
       console.error('ERROR', err);
     });

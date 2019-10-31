@@ -18,11 +18,11 @@ export class AgendamentoProvider {
       .set('token', "123")
    }
 
-  buscarTodos(idUsuario: number, tokenUsuario: string) {
+  buscarTodos(idUsuario: number, dataInicio:string, dataFim: string, situacao:string) {
 
     
      
-    return this.api.get(`agendamentos/usuarios/${idUsuario}`, null, this.header ).map(res => {
+    return this.api.get(`agendamentos/usuarios/${idUsuario}?dataInicio=${dataInicio}&dataFim=${dataFim}&filtro=${situacao}`, null, this.header ).map(res => {
          
         return res;
     })

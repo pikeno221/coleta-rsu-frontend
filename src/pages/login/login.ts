@@ -35,17 +35,34 @@ export class LoginPage {
         console.log(usuario)
       
         this.usuarioService._usuario = usuario;
-        this.navCtrl.push('TabsAdminPage', {
+        if (this.usuarioService._usuario.email == "admin@admin.com")
+        {
+          this.navCtrl.push('TabsAdminPage', {
           usuario: usuario
         });
+      }
+      else{
+        this.navCtrl.push('TabsPage', {
+          usuario: usuario
+        });
+      }
       }
   }
   // Attempt to login in through our usuario service
   doLogin() {
     this.usuarioService.login(this.usuario).subscribe((resp) => {
-      this.navCtrl.push('TabsAdminPage', {
-        usuario: this.usuario
-      });
+      if (this.usuarioService._usuario.email == "admin@admin.com")
+        {
+          this.navCtrl.push('TabsAdminPage', {
+          usuario: this.usuario
+        });
+      }
+      else{
+        this.navCtrl.push('TabsPage', {
+          usuario: this.usuario
+        });
+      }
+      
     }, (err) => {
       let response = new LoginResponse();
       response = err.error;
@@ -60,5 +77,8 @@ export class LoginPage {
      toast.present();
     });
    
+  }
+  register(){
+    this.navCtrl.push('SignupPage')
   }
 }

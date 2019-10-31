@@ -52,7 +52,7 @@ export class ListaAdminCanceladasPage {
     }
   
     public openItem(item: Item) {
-      this.navCtrl.push('ItemDetailPage', {
+      this.navCtrl.push('ItemAdminDetailPage', {
         item: item
       });
     }

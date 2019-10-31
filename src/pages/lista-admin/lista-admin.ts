@@ -49,14 +49,15 @@ export class ListaAdminPage {
   }
   // cancela agendamento
   public ConcluirItem(item) {
-    item.status = "AGENDAMENTO_CONFIRMADO"
+    item.status = "CONCLUIDO"
+    item.usuario = item.usuario.id
     this.agendamento.CancelarAgendamento(item)
     this.currentItems.splice(this.currentItems.indexOf(item), 1);
     //this.items.delete(item);
   }
 
   openItem(item: Item) {
-    this.navCtrl.push('ItemDetailPage', {
+    this.navCtrl.push('ItemAdminDetailPage', {
       item: item
     });
   }

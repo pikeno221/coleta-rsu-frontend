@@ -19,7 +19,10 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'lista-canceladas.html'
 })
 export class ListaCanceladasPage {
-
+  data: { dataAgendada: string, dataAgendadaFim: string} = {
+    dataAgendada: '01/01/2019',
+    dataAgendadaFim: '01/12/2019'
+  };
   currentItems: Item[] = [];
   constructor(public navCtrl: NavController,
     public settings: Settings,
@@ -39,7 +42,7 @@ export class ListaCanceladasPage {
   
     public BindList()
     {
-      this.agendamento.buscarTodos(this.usuario._usuario.id, '123').subscribe(data => {
+      this.agendamento.buscarTodos(this.usuario._usuario.id,this.data.dataAgendada, this.data.dataAgendadaFim, "CANCELADO").subscribe(data => {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
           if(element.status == 'CANCELADO'){
