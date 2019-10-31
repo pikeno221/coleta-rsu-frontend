@@ -16,8 +16,8 @@ export class SignupPage {
   // sure to add it to the type
   usuario: { nomeCompleto: string, email: string, senha: string, celular: string, endereco: string, tipoPessoa: string, statusUsuario:string } = {
     nomeCompleto: 'teste',
-    email: 'test@example.com',
-    senha: 'test',
+    email: 'teste@exemplo.com',
+    senha: 'teste',
     celular: '+55 (31)98454-8992',
     endereco: 'Rua teste, 45, Bairro teste',
     tipoPessoa: "PESSOA_FISICA",
