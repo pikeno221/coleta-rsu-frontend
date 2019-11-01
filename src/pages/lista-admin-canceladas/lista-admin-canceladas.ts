@@ -37,8 +37,8 @@ export class ListaAdminCanceladasPage {
       console.log('ionViewDidLoad ListaPendentesPage');
     }
   
-    public BindList()
-    {
+    public BindList(){
+      this.currentItems = [];
       this.agendamento.buscarTodosAdmin().subscribe(data => {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];

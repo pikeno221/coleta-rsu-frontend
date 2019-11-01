@@ -4,6 +4,7 @@ import { Item } from '../../models/item';
 import { Items, Usuario } from '../../providers';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
 import { TabsPage } from '../tabs/tabs';
+import { TabsAdminPage } from '../tabs-admin/tabs-admin';
 
 
 /**
@@ -21,7 +22,7 @@ import { TabsPage } from '../tabs/tabs';
 export class ListaAdminPendentesPage {
   currentItems: Item[] = [];
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, 
-    public agendamento: AgendamentoProvider, public usuario: Usuario) {
+    public agendamento: AgendamentoProvider, public usuario: Usuario, public tabs:TabsAdminPage) {
     this.BindList();
     
   }
@@ -30,8 +31,8 @@ export class ListaAdminPendentesPage {
     console.log('ionViewDidLoad ListaAdminPendentesPage');
   }
 
-  public BindList()
-  {
+  public BindList(){
+    this.currentItems = [];
     this.agendamento.buscarTodosAdmin().subscribe(data => {
       for (let index = 0; index < data.agendamentos.length; index++) {
         const element = data.agendamentos[index];
@@ -63,6 +64,7 @@ export class ListaAdminPendentesPage {
     item.usuario = item.usuario.id
     this.agendamento.CancelarAgendamento(item);
     this.currentItems.splice(this.currentItems.indexOf(item), 1);
+    this.tabs.atualizarTodaAbas();
   }
   
 }

@@ -56,7 +56,7 @@ export class ItemCreatePage {
     if (!this.form.valid) { return; }
     let dataSelecionada = new Date(this.form.value['dataAgendada']);
     this.form.value['usuario'] = this.usuario._usuario.id
-    this.form.value['dataAgendada'] = dataSelecionada.getDate() + "/" + dataSelecionada.getMonth()+ "/" + dataSelecionada.getFullYear()  + " " + new Date(this.form.value['dataAgendada']).toTimeString();
+    this.form.value['dataAgendada'] = dataSelecionada.getDate() + "/" + dataSelecionada.getMonth()+ "/" + dataSelecionada.getFullYear()  + " " + dataSelecionada.getHours() + ":" + dataSelecionada.getMinutes();
     this.form.value['status'] = 'AGUARDANDO_CONFICAMACAO';
     console.log(this.form.value);
     this.viewCtrl.dismiss(this.form.value);

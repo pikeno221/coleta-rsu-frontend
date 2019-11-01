@@ -45,4 +45,19 @@ export class TabsAdminPage {
     })
     addModal.present();
   }
+  atualizarTodaAbas(){
+    let tabs = this.navCtrl.getAllChildNavs()
+        if (tabs[0]._tabs[0]._views && tabs[0]._tabs[0]._views.length > 0){
+          tabs[0]._tabs[0]._views[0].instance.BindList()
+        }
+        if (tabs[0]._tabs[1]._views && tabs[0]._tabs[1]._views.length > 0){
+          tabs[0]._tabs[1]._views[0].instance.BindList()
+        }
+        if (tabs[0]._tabs[2]._views && tabs[0]._tabs[2]._views.length > 0){
+          tabs[0]._tabs[2]._views[0].instance.BindList()
+        }
+        if (tabs[0]._tabs[3]._views && tabs[0]._tabs[3]._views.length > 0){
+          tabs[0]._tabs[3]._views[0].instance.BindList()
+        }
+  }
 }

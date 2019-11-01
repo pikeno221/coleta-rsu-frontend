@@ -35,7 +35,7 @@ export class ListaAdminPage {
    * modal and then adds the new item to our data source if the usuario created one.
    */
   public BindList(){
-    
+    this.currentItems = [];
     this.agendamento.buscarTodosAdmin().subscribe(data => {
       for (let index = 0; index < data.agendamentos.length; index++) {
         const element = data.agendamentos[index];
@@ -51,8 +51,9 @@ export class ListaAdminPage {
   public ConcluirItem(item) {
     item.status = "CONCLUIDO"
     item.usuario = item.usuario.id
-    this.agendamento.CancelarAgendamento(item)
+    this.agendamento.AtualizarAgendamento(item)
     this.currentItems.splice(this.currentItems.indexOf(item), 1);
+    this.tabs.atualizarTodaAbas();
     //this.items.delete(item);
   }
 

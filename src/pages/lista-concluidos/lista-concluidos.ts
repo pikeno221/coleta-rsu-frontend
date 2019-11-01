@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
 import { TabsPage } from '../tabs/tabs';
-import { Usuario } from '../../providers';
+import { Usuario, Items } from '../../providers';
 import { Item } from '../../models/item';
 
 /**
@@ -22,15 +22,21 @@ export class ListaConcluidosPage {
     dataAgendada: '01/01/2019',
     dataAgendadaFim: '01/12/2019'
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams, public usuario: Usuario, public agendamento: AgendamentoProvider, public tabs:TabsPage) {
-  }
   currentItems: Item[] = [];
+  constructor(public navCtrl: NavController, public navParams: NavParams, public usuario: Usuario, public agendamento: AgendamentoProvider, public tabs:TabsPage, public items: Items,) {
+    this.BindList();
+    //this.currentItems = this.items.query();
+  }
+  
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaConcluidosPage');
   }
 
-  public BindList()
-    {
+  public BindList(item?:any){
+    this.currentItems = [];
+    this.data.dataAgendada = item ? `${new Date(item.dataAgendada).getUTCDate()}/${new Date(item.dataAgendada).getUTCMonth()+1}/${new Date(item.dataAgendada).getUTCFullYear()}` : this.data.dataAgendada;
+    this.data.dataAgendadaFim = item ? `${new Date(item.dataAgendadaFim).getUTCDate()}/${new Date(item.dataAgendadaFim).getUTCMonth()+1}/${new Date(item.dataAgendadaFim).getUTCFullYear()}` : this.data.dataAgendadaFim;
+
       this.agendamento.buscarTodos(this.usuario._usuario.id,  this.data.dataAgendada, this.data.dataAgendadaFim,"CONCLUIDO").subscribe(data => {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];

@@ -59,5 +59,14 @@ export class AgendamentoProvider {
     console.error('ERROR', err);
   })
   }
+  AtualizarAgendamento(agendamento:any){
+    let seq = this.api.patch(`agendamentos/${agendamento.id}`, {statusColeta: agendamento.status},this.header).share();
+    seq.subscribe(res => {
+
+      return res;
+  },err => {
+    console.error('ERROR', err);
+  })
+  }
 
 }

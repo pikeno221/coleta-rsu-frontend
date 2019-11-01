@@ -26,7 +26,7 @@ export class ListaPage {
     public tabs: TabsPage,
     public toastCtrl?: ToastController) {
     this.BindList();
-    this.currentItems = this.items.query();
+    //this.currentItems = this.items.query();
   }
   /**
    * The view loaded, let's query our items for the list
@@ -37,8 +37,11 @@ export class ListaPage {
    * Prompt the usuario to add a new item. This shows our ItemCreatePage in a
    * modal and then adds the new item to our data source if the usuario created one.
    */
-  public BindList(){
-    
+  public BindList(item?:any){
+    this.currentItems = [];
+
+    this.data.dataAgendada = item ? `${new Date(item.dataAgendada).getUTCDate()}/${new Date(item.dataAgendada).getUTCMonth()+1}/${new Date(item.dataAgendada).getUTCFullYear()}` : this.data.dataAgendada;
+    this.data.dataAgendadaFim = item ? `${new Date(item.dataAgendadaFim).getUTCDate()}/${new Date(item.dataAgendadaFim).getUTCMonth()+1}/${new Date(item.dataAgendadaFim).getUTCFullYear()}` : this.data.dataAgendadaFim;
     this.agendamento.buscarTodos(this.usuario._usuario.id, this.data.dataAgendada, this.data.dataAgendadaFim, "AGENDAMENTO_CONFIRMADO").subscribe(data => {
       for (let index = 0; index < data.agendamentos.length; index++) {
         const element = data.agendamentos[index];
