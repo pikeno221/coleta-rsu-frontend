@@ -85,7 +85,11 @@ export class ListaPendentesPage {
   onChange($event) {
     console.log('ok event');
     console.log($event);
+    let enderecos: string [];
+    enderecos = $event;
+    console.log(enderecos);
     this.navCtrl.push('MapaPage', {
+      enderecos
     });
   }
   // cria novo agendamento

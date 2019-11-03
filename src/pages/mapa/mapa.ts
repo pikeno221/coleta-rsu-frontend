@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage } from 'ionic-angular';
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 declare var google;
 
@@ -15,8 +15,12 @@ export class MapaPage {
   startPosition: any;
   originPosition: string;
   destinationPosition: string;
+  public enderecos:string[];
 
-  constructor() { }
+  constructor(public navCtrl: NavController, navParams: NavParams, enderecos:string[]) { 
+    this.enderecos = navParams.get('enderecos');
+    console.log('enderecooos --> ', enderecos);
+  }
 
   ionViewDidLoad() {
     console.log('passou aqui');

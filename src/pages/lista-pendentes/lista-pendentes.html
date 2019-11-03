@@ -25,7 +25,7 @@
     </ion-item-sliding>
     
 
-    <ion-select [(ngModel)]="currentItems" multiple="true" #mySelect [hidden]='hideMe' (ionChange)="onChange($event)">
+    <ion-select  multiple="true" #mySelect [hidden]='hideMe' (ionChange)="onChange($event)">
         <ion-option *ngFor="let item of currentItems" [value]="item.usuario.endereco">{{item.usuario.endereco}}</ion-option>
     </ion-select>
 
