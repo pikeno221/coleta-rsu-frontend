@@ -52,6 +52,13 @@ export class MapaPage {
         // Pode ser uma coordenada (LatLng), uma string ou um lugar
         origin: this.originPosition,
         destination: this.destinationPosition,
+        waypoints: [{
+            location: 'Av Abilio Machado, Alipio de Melo',
+            stopover: false
+          },{
+            location: 'Avenida do Contorno, Savassi',
+            stopover: false
+          }],
         travelMode: 'DRIVING'
       };
 
