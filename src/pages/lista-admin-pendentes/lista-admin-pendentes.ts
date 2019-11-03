@@ -20,6 +20,10 @@ import { TabsAdminPage } from '../tabs-admin/tabs-admin';
   templateUrl: 'lista-admin-pendentes.html',
 })
 export class ListaAdminPendentesPage {
+  data: { dataAgendada: string, dataAgendadaFim: string} = {
+    dataAgendada: '01/01/2019',
+    dataAgendadaFim: '01/12/2019'
+  };
   currentItems: Item[] = [];
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, 
     public agendamento: AgendamentoProvider, public usuario: Usuario, public tabs:TabsAdminPage) {
@@ -31,14 +35,19 @@ export class ListaAdminPendentesPage {
     console.log('ionViewDidLoad ListaAdminPendentesPage');
   }
 
-  public BindList(){
+  public BindList(item?:any)
+  {
     this.currentItems = [];
-    this.agendamento.buscarTodosAdmin().subscribe(data => {
+    this.data.dataAgendada = item ? `${new Date(item.dataAgendada).getUTCDate()}/${new Date(item.dataAgendada).getUTCMonth()+1}/${new Date(item.dataAgendada).getUTCFullYear()}` : this.data.dataAgendada;
+    this.data.dataAgendadaFim = item ? `${new Date(item.dataAgendadaFim).getUTCDate()}/${new Date(item.dataAgendadaFim).getUTCMonth()+1}/${new Date(item.dataAgendadaFim).getUTCFullYear()}` : this.data.dataAgendadaFim;
+    this.agendamento.buscarTodosAdmin(this.data.dataAgendada, this.data.dataAgendadaFim, "AGUARDANDO_CONFICAMACAO").subscribe(data => {
+      if(data.agendamentos){
       for (let index = 0; index < data.agendamentos.length; index++) {
         const element = data.agendamentos[index];
         if(element.status == 'AGUARDANDO_CONFICAMACAO'){
           this.currentItems.push(element);
         }        
+      }
     }
     },err =>{
       //this.tabs.addItem()
@@ -55,14 +64,14 @@ export class ListaAdminPendentesPage {
     console.log(item)
     item.status = "CANCELADO"
     item.usuario = item.usuario.id
-    this.agendamento.CancelarAgendamento(item);
+    this.agendamento.AtualizarAgendamento(item);
     this.currentItems.splice(this.currentItems.indexOf(item), 1);
   }
 
   Confirmar(item){
     item.status = "AGENDAMENTO_CONFIRMADO"
     item.usuario = item.usuario.id
-    this.agendamento.CancelarAgendamento(item);
+    this.agendamento.AtualizarAgendamento(item);
     this.currentItems.splice(this.currentItems.indexOf(item), 1);
     this.tabs.atualizarTodaAbas();
   }

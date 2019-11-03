@@ -38,6 +38,7 @@ export class ListaConcluidosPage {
     this.data.dataAgendadaFim = item ? `${new Date(item.dataAgendadaFim).getUTCDate()}/${new Date(item.dataAgendadaFim).getUTCMonth()+1}/${new Date(item.dataAgendadaFim).getUTCFullYear()}` : this.data.dataAgendadaFim;
 
       this.agendamento.buscarTodos(this.usuario._usuario.id,  this.data.dataAgendada, this.data.dataAgendadaFim,"CONCLUIDO").subscribe(data => {
+        if(data.agendamentos)
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
           if(element.status == 'CONCLUIDO'){

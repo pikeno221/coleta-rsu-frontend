@@ -30,8 +30,8 @@ export class AgendamentoProvider {
     
     }
 
-    buscarTodosAdmin() {
-      return this.api.get(`agendamentos`, null, this.header ).map(res => {
+    buscarTodosAdmin(dataInicio:string, dataFim: string, situacao:string) {
+      return this.api.get(`agendamentos?dataInicio=${dataInicio}&dataFim=${dataFim}&filtro=${situacao}`, null, this.header ).map(res => {
           return res;
       })
     }

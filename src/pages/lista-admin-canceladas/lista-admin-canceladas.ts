@@ -19,7 +19,10 @@ import { TabsAdminPage } from '../tabs-admin/tabs-admin';
   templateUrl: 'lista-admin-canceladas.html'
 })
 export class ListaAdminCanceladasPage {
-
+  data: { dataAgendada: string, dataAgendadaFim: string} = {
+    dataAgendada: '01/01/2019',
+    dataAgendadaFim: '01/12/2019'
+  };
   currentItems: Item[] = [];
   constructor(public navCtrl: NavController,
     public settings: Settings,
@@ -37,9 +40,11 @@ export class ListaAdminCanceladasPage {
       console.log('ionViewDidLoad ListaPendentesPage');
     }
   
-    public BindList(){
-      this.currentItems = [];
-      this.agendamento.buscarTodosAdmin().subscribe(data => {
+    public BindList(item?:any){
+      this.currentItems = []; 
+      this.data.dataAgendada = item ? `${new Date(item.dataAgendada).getUTCDate()}/${new Date(item.dataAgendada).getUTCMonth()+1}/${new Date(item.dataAgendada).getUTCFullYear()}` : this.data.dataAgendada;
+      this.data.dataAgendadaFim = item ? `${new Date(item.dataAgendadaFim).getUTCDate()}/${new Date(item.dataAgendadaFim).getUTCMonth()+1}/${new Date(item.dataAgendadaFim).getUTCFullYear()}` : this.data.dataAgendadaFim;
+      this.agendamento.buscarTodosAdmin(this.data.dataAgendada, this.data.dataAgendadaFim, "CANCELADO").subscribe(data => {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
           if(element.status == 'CANCELADO'){
@@ -47,7 +52,7 @@ export class ListaAdminCanceladasPage {
           }        
       }
       },err =>{
-        this.tabs.addItem()
+        
       });
     }
   

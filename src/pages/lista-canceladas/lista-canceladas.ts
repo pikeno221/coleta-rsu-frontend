@@ -46,11 +46,13 @@ export class ListaCanceladasPage {
     this.data.dataAgendada = item ? `${new Date(item.dataAgendada).getUTCDate()}/${new Date(item.dataAgendada).getUTCMonth()+1}/${new Date(item.dataAgendada).getUTCFullYear()}` : this.data.dataAgendada;
     this.data.dataAgendadaFim = item ? `${new Date(item.dataAgendadaFim).getUTCDate()}/${new Date(item.dataAgendadaFim).getUTCMonth()+1}/${new Date(item.dataAgendadaFim).getUTCFullYear()}` : this.data.dataAgendadaFim;
       this.agendamento.buscarTodos(this.usuario._usuario.id,this.data.dataAgendada, this.data.dataAgendadaFim, "CANCELADO").subscribe(data => {
+        if(data.agendamentos){
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
           if(element.status == 'CANCELADO'){
             this.currentItems.push(element);
           }        
+        }
       }
       },err =>{
         this.tabs.addItem()

@@ -55,8 +55,9 @@ export class ItemCreatePage {
   done() {
     if (!this.form.valid) { return; }
     let dataSelecionada = new Date(this.form.value['dataAgendada']);
+    this.form.value['materiaisColeta'] = this.form.value['materiaisColeta'].toString();
     this.form.value['usuario'] = this.usuario._usuario.id
-    this.form.value['dataAgendada'] = dataSelecionada.getDate() + "/" + dataSelecionada.getMonth()+ "/" + dataSelecionada.getFullYear()  + " " + dataSelecionada.getHours() + ":" + dataSelecionada.getMinutes();
+    this.form.value['dataAgendada'] = dataSelecionada.getUTCDate() + "/" + (dataSelecionada.getUTCMonth()+1)+ "/" + dataSelecionada.getUTCFullYear()  + " " + dataSelecionada.getUTCHours() + ":" + dataSelecionada.getUTCMinutes();
     this.form.value['status'] = 'AGUARDANDO_CONFICAMACAO';
     console.log(this.form.value);
     this.viewCtrl.dismiss(this.form.value);
