@@ -44,6 +44,7 @@ export class ListaPendentesPage {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
           if (element.status == 'AGUARDANDO_CONFICAMACAO') {
+            console.log(element);
             this.currentItems.push(element);
           }
         }

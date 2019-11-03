@@ -25,10 +25,8 @@
     </ion-item-sliding>
     
 
-    <ion-select [(ngModel)]="toppings" multiple="true" #mySelect [hidden]='hideMe' (ionChange)="onChange($event)">
-      <ion-option>Usuario 1 - Rua Ministro Jorge Vargas, Castelo</ion-option>
-      <ion-option>Usuario 2 - Rua Julio de Castilho, Betania</ion-option>
-      <ion-option>Usuario 3 - Avenida do Contorno, Savassi</ion-option>
+    <ion-select [(ngModel)]="currentItems" multiple="true" #mySelect [hidden]='hideMe' (ionChange)="onChange($event)">
+        <ion-option *ngFor="let item of currentItems" [value]="item.usuario.endereco">{{item.usuario.endereco}}</ion-option>
     </ion-select>
 
     <button ion-button full color="danger" (click)="showTodayRouteModal()">Calcular Rota </button>
