@@ -18,34 +18,35 @@ import { Item } from '../../models/item';
   templateUrl: 'lista-concluidos.html',
 })
 export class ListaConcluidosPage {
-  data: { dataAgendada: string, dataAgendadaFim: string} = {
+  data: { dataAgendada: string, dataAgendadaFim: string } = {
     dataAgendada: '01/01/2019',
     dataAgendadaFim: '01/12/2019'
   };
-  constructor(public navCtrl: NavController, public navParams: NavParams, public usuario: Usuario, public agendamento: AgendamentoProvider, public tabs:TabsPage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public usuario: Usuario, public agendamento: AgendamentoProvider, public tabs: TabsPage) {
   }
   currentItems: Item[] = [];
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaConcluidosPage');
   }
 
-  public BindList()
-    {
-      this.agendamento.buscarTodos(this.usuario._usuario.id,  this.data.dataAgendada, this.data.dataAgendadaFim,"CONCLUIDO").subscribe(data => {
+  public BindList() {
+    this.agendamento.buscarTodos(this.usuario._usuario.id, this.data.dataAgendada, this.data.dataAgendadaFim, "CONCLUIDO").subscribe(data => {
+      if (data.agendamentos != null) {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
-          if(element.status == 'CONCLUIDO'){
+          if (element.status == 'CONCLUIDO') {
             this.currentItems.push(element);
-          }        
+          }
+        }
       }
-      },err =>{
-        this.tabs.addItem()
-      });
-    }
-  
-    public openItem(item: Item) {
-      this.navCtrl.push('ItemDetailPage', {
-        item: item
-      });
-    }
+    }, err => {
+      this.tabs.addItem()
+    });
+  }
+
+  public openItem(item: Item) {
+    this.navCtrl.push('ItemDetailPage', {
+      item: item
+    });
+  }
 }

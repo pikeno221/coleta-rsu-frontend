@@ -23,8 +23,8 @@ export class TabsAdminPage {
   tab3Title = " ";
   tab4Title = " ";
 
-  constructor(public navCtrl: NavController, 
-    public translateService: TranslateService, 
+  constructor(public navCtrl: NavController,
+    public translateService: TranslateService,
     public agendamento: AgendamentoProvider,
     public modalCtrl: ModalController,
     public usuario: Usuario) {
@@ -36,11 +36,13 @@ export class TabsAdminPage {
     });
   }
   addItem() {
+    console.log('item -> ');
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
+      console.log('item -> ', item);
       this.agendamento.salvarAgendamento(item);
-      var listaItemPendente = new Items();  
-      var listaPendente = new ListaPendentesPage(this.navCtrl, listaItemPendente , this.modalCtrl, this.agendamento, this.usuario);
+      var listaItemPendente = new Items();
+      var listaPendente = new ListaPendentesPage(this.navCtrl, listaItemPendente, this.modalCtrl, this.agendamento, this.usuario);
       listaPendente.BindList();
     })
     addModal.present();

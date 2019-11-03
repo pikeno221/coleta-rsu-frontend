@@ -19,31 +19,32 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'lista-pendentes.html',
 })
 export class ListaPendentesPage {
-  data: { dataAgendada: string, dataAgendadaFim: string} = {
+  data: { dataAgendada: string, dataAgendadaFim: string } = {
     dataAgendada: '01/01/2019',
     dataAgendadaFim: '01/12/2019'
   };
   currentItems: Item[] = [];
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, 
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
     public agendamento: AgendamentoProvider, public usuario: Usuario) {
     this.BindList();
-    
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaPendentesPage');
   }
 
-  public BindList()
-  {
+  public BindList() {
     this.agendamento.buscarTodos(this.usuario._usuario.id, this.data.dataAgendada, this.data.dataAgendadaFim, "AGUARDANDO_CONFICAMACAO").subscribe(data => {
-      for (let index = 0; index < data.agendamentos.length; index++) {
-        const element = data.agendamentos[index];
-        if(element.status == 'AGUARDANDO_CONFICAMACAO'){
-          this.currentItems.push(element);
-        }        
-    }
-    },err =>{
+      if (data.agendamentos != null) {
+        for (let index = 0; index < data.agendamentos.length; index++) {
+          const element = data.agendamentos[index];
+          if (element.status == 'AGUARDANDO_CONFICAMACAO') {
+            this.currentItems.push(element);
+          }
+        }
+      }
+    }, err => {
       //this.tabs.addItem()
     });
   }
@@ -56,14 +57,14 @@ export class ListaPendentesPage {
   }
   // cancela agendamento
   public deleteItem(item) {
-    
+
     console.log(item)
     item.status = "CANCELADO"
     item.usuario = item.usuario.id
     this.agendamento.CancelarAgendamento(item);
     this.currentItems.splice(this.currentItems.indexOf(item), 1);
-    
-    
+
+
   }
   // cria novo agendamento
   // public addItem(){

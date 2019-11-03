@@ -20,26 +20,27 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class ListaAdminPendentesPage {
   currentItems: Item[] = [];
-  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, 
+  constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
     public agendamento: AgendamentoProvider, public usuario: Usuario) {
     this.BindList();
-    
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaAdminPendentesPage');
   }
 
-  public BindList()
-  {
+  public BindList() {
     this.agendamento.buscarTodosAdmin().subscribe(data => {
-      for (let index = 0; index < data.agendamentos.length; index++) {
-        const element = data.agendamentos[index];
-        if(element.status == 'AGUARDANDO_CONFICAMACAO'){
-          this.currentItems.push(element);
-        }        
-    }
-    },err =>{
+      if (data.agendamentos != null) {
+        for (let index = 0; index < data.agendamentos.length; index++) {
+          const element = data.agendamentos[index];
+          if (element.status == 'AGUARDANDO_CONFICAMACAO') {
+            this.currentItems.push(element);
+          }
+        }
+      }
+    }, err => {
       //this.tabs.addItem()
     });
   }
@@ -50,7 +51,7 @@ export class ListaAdminPendentesPage {
   }
   // cancela agendamento
   public deleteItem(item) {
-    
+
     console.log(item)
     item.status = "CANCELADO"
     item.usuario = item.usuario.id
@@ -58,11 +59,11 @@ export class ListaAdminPendentesPage {
     this.currentItems.splice(this.currentItems.indexOf(item), 1);
   }
 
-  Confirmar(item){
+  Confirmar(item) {
     item.status = "AGENDAMENTO_CONFIRMADO"
     item.usuario = item.usuario.id
     this.agendamento.CancelarAgendamento(item);
     this.currentItems.splice(this.currentItems.indexOf(item), 1);
   }
-  
+
 }

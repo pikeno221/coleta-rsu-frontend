@@ -19,7 +19,7 @@ import { TabsAdminPage } from '../tabs-admin/tabs-admin';
 })
 export class ListaAdminConcluidosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public usuario: Usuario, public agendamento: AgendamentoProvider, public tabs:TabsAdminPage) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public usuario: Usuario, public agendamento: AgendamentoProvider, public tabs: TabsAdminPage) {
     this.BindList()
   }
   currentItems: Item[] = [];
@@ -27,23 +27,24 @@ export class ListaAdminConcluidosPage {
     console.log('ionViewDidLoad ListaConcluidosPage');
   }
 
-  public BindList()
-    {
-      this.agendamento.buscarTodosAdmin().subscribe(data => {
+  public BindList() {
+    this.agendamento.buscarTodosAdmin().subscribe(data => {
+      if (data.agendamentos != null) {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
-          if(element.status == 'CONCLUIDO'){
+          if (element.status == 'CONCLUIDO') {
             this.currentItems.push(element);
-          }        
+          }
+        }
       }
-      },err =>{
-        this.tabs.addItem()
-      });
-    }
-  
-    public openItem(item: Item) {
-      this.navCtrl.push('ItemAdminDetailPage', {
-        item: item
-      });
-    }
+    }, err => {
+      this.tabs.addItem()
+    });
+  }
+
+  public openItem(item: Item) {
+    this.navCtrl.push('ItemAdminDetailPage', {
+      item: item
+    });
+  }
 }

@@ -24,10 +24,11 @@ export class MapaPage {
   }
 
   initializeMap() {
-    this.startPosition = new google.maps.LatLng(-21.763409, -43.349034);
+      
+    this.startPosition = new google.maps.LatLng(-19.9881067, -43.8459882);
     console.log('startPosition', this.startPosition);
     const mapOptions = {
-      zoom: 18,
+      zoom: 14,
       center: this.startPosition,
       disableDefaultUI: true
     }

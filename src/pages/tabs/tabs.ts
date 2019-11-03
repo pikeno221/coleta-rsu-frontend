@@ -38,10 +38,12 @@ export class TabsPage {
   addItem() {
     let addModal = this.modalCtrl.create('ItemCreatePage');
     addModal.onDidDismiss(item => {
+        if (item != undefined){
       this.agendamento.salvarAgendamento(item);
       var listaItemPendente = new Items();  
       var listaPendente = new ListaPendentesPage(this.navCtrl, listaItemPendente , this.modalCtrl, this.agendamento, this.usuario);
       listaPendente.BindList();
+    }
     })
     addModal.present();
   }

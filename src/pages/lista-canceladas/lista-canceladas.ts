@@ -19,7 +19,7 @@ import { TabsPage } from '../tabs/tabs';
   templateUrl: 'lista-canceladas.html'
 })
 export class ListaCanceladasPage {
-  data: { dataAgendada: string, dataAgendadaFim: string} = {
+  data: { dataAgendada: string, dataAgendadaFim: string } = {
     dataAgendada: '01/01/2019',
     dataAgendadaFim: '01/12/2019'
   };
@@ -29,36 +29,37 @@ export class ListaCanceladasPage {
     public formBuilder: FormBuilder,
     public navParams: NavParams,
     public translate: TranslateService,
-    public agendamento:AgendamentoProvider,
+    public agendamento: AgendamentoProvider,
     public usuario: Usuario,
     public tabs: TabsPage) {
-      this.BindList();
-    
-    }
-  
-    ionViewDidLoad() {
-      console.log('ionViewDidLoad ListaPendentesPage');
-    }
-  
-    public BindList()
-    {
-      this.agendamento.buscarTodos(this.usuario._usuario.id,this.data.dataAgendada, this.data.dataAgendadaFim, "CANCELADO").subscribe(data => {
+    this.BindList();
+
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ListaPendentesPage');
+  }
+
+  public BindList() {
+    this.agendamento.buscarTodos(this.usuario._usuario.id, this.data.dataAgendada, this.data.dataAgendadaFim, "CANCELADO").subscribe(data => {
+      if (data.agendamentos != null) {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
-          if(element.status == 'CANCELADO'){
+          if (element.status == 'CANCELADO') {
             this.currentItems.push(element);
-          }        
+          }
+        }
       }
-      },err =>{
-        this.tabs.addItem()
-      });
-    }
-  
-    public openItem(item: Item) {
-      this.navCtrl.push('ItemDetailPage', {
-        item: item
-      });
-    }
-    // cancela agendamento
-    
+    }, err => {
+      this.tabs.addItem()
+    });
+  }
+
+  public openItem(item: Item) {
+    this.navCtrl.push('ItemDetailPage', {
+      item: item
+    });
+  }
+  // cancela agendamento
+
 }

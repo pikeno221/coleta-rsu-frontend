@@ -26,36 +26,37 @@ export class ListaAdminCanceladasPage {
     public formBuilder: FormBuilder,
     public navParams: NavParams,
     public translate: TranslateService,
-    public agendamento:AgendamentoProvider,
+    public agendamento: AgendamentoProvider,
     public usuario: Usuario,
     public tabs: TabsAdminPage) {
-      this.BindList();
-    
-    }
-  
-    ionViewDidLoad() {
-      console.log('ionViewDidLoad ListaPendentesPage');
-    }
-  
-    public BindList()
-    {
-      this.agendamento.buscarTodosAdmin().subscribe(data => {
+    this.BindList();
+
+  }
+
+  ionViewDidLoad() {
+    console.log('ionViewDidLoad ListaPendentesPage');
+  }
+
+  public BindList() {
+    this.agendamento.buscarTodosAdmin().subscribe(data => {
+      if (data.agendamentos != null) {
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
-          if(element.status == 'CANCELADO'){
+          if (element.status == 'CANCELADO') {
             this.currentItems.push(element);
-          }        
+          }
+        }
       }
-      },err =>{
-        this.tabs.addItem()
-      });
-    }
-  
-    public openItem(item: Item) {
-      this.navCtrl.push('ItemAdminDetailPage', {
-        item: item
-      });
-    }
-    // cancela agendamento
-    
+    }, err => {
+      this.tabs.addItem()
+    });
+  }
+
+  public openItem(item: Item) {
+    this.navCtrl.push('ItemAdminDetailPage', {
+      item: item
+    });
+  }
+  // cancela agendamento
+
 }

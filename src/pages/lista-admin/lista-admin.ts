@@ -6,7 +6,7 @@ import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
 import { TabsAdminPage } from '../tabs-admin/tabs-admin';
 
 
- 
+
 
 @IonicPage()
 @Component({
@@ -16,9 +16,9 @@ import { TabsAdminPage } from '../tabs-admin/tabs-admin';
 export class ListaAdminPage {
 
   currentItems: Item[] = [];
-  constructor(public navCtrl: NavController, 
-    public items: Items, 
-    public modalCtrl: ModalController, 
+  constructor(public navCtrl: NavController,
+    public items: Items,
+    public modalCtrl: ModalController,
     public agendamento: AgendamentoProvider,
     public usuario: Usuario,
     public tabs: TabsAdminPage) {
@@ -34,16 +34,17 @@ export class ListaAdminPage {
    * Prompt the usuario to add a new item. This shows our ItemCreatePage in a
    * modal and then adds the new item to our data source if the usuario created one.
    */
-  public BindList(){
-    
+  public BindList() {
     this.agendamento.buscarTodosAdmin().subscribe(data => {
-      for (let index = 0; index < data.agendamentos.length; index++) {
-        const element = data.agendamentos[index];
-        if(element.status == 'AGENDAMENTO_CONFIRMADO'){
-          this.currentItems.push(element);
-        }        
-    }
-    },err =>{
+      if (data.agendamentos != null) {
+        for (let index = 0; index < data.agendamentos.length; index++) {
+          const element = data.agendamentos[index];
+          if (element.status == 'AGENDAMENTO_CONFIRMADO') {
+            this.currentItems.push(element);
+          }
+        }
+      }
+    }, err => {
       this.tabs.addItem()
     });
   }
