@@ -71,9 +71,11 @@ export class ListaAdminPendentesPage {
   Confirmar(item){
     item.status = "AGENDAMENTO_CONFIRMADO"
     item.usuario = item.usuario.id
-    this.agendamento.AtualizarAgendamento(item);
-    this.currentItems.splice(this.currentItems.indexOf(item), 1);
-    this.tabs.atualizarTodaAbas();
+    this.agendamento.AtualizarAgendamento(item).subscribe(data =>{
+      this.currentItems.splice(this.currentItems.indexOf(item), 1);
+      this.tabs.atualizarTodaAbas();
+    } );
+    
   }
   
 }

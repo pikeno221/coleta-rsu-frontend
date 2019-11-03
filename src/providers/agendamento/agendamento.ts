@@ -67,6 +67,7 @@ export class AgendamentoProvider {
   },err => {
     console.error('ERROR', err);
   })
+  return seq;
   }
 
 }

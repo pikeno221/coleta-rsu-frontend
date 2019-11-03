@@ -37,6 +37,7 @@ export class TabsAdminPage {
   }
  
   atualizarTodaAbas(){
+    debugger;
     let tabs = this.navCtrl.getAllChildNavs()
         if (tabs[0]._tabs[0]._views && tabs[0]._tabs[0]._views.length > 0){
           tabs[0]._tabs[0]._views[0].instance.BindList()
