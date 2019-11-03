@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, ModalController, Select } from 'ionic-angular';
 import { Item } from '../../models/item';
 import { Items, Usuario } from '../../providers';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
@@ -24,8 +24,12 @@ export class ListaPendentesPage {
     dataAgendadaFim: '01/12/2019'
   };
   currentItems: Item[] = [];
+  hideMe: boolean;
+
+  @ViewChild('mySelect') selectRef: Select;
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
     public agendamento: AgendamentoProvider, public usuario: Usuario) {
+    this.hideMe = true;
     this.BindList();
 
   }
@@ -49,6 +53,10 @@ export class ListaPendentesPage {
     });
   }
 
+  public showTodayRouteModal() {
+    this.selectRef.open();
+  }
+
 
   public openItem(item: Item) {
     this.navCtrl.push('ItemDetailPage', {
@@ -65,6 +73,19 @@ export class ListaPendentesPage {
     this.currentItems.splice(this.currentItems.indexOf(item), 1);
 
 
+  }
+
+  public redirecionarMapa(items) {
+    console.log(items);
+
+
+  }
+
+  onChange($event) {
+    console.log('ok event');
+    console.log($event);
+    this.navCtrl.push('MapaPage', {
+    });
   }
   // cria novo agendamento
   // public addItem(){
