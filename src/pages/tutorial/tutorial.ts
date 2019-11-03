@@ -69,7 +69,7 @@ export class TutorialPage {
 
   startApp() {
     window.localStorage.setItem("skiped", "true");
-    this.navCtrl.setRoot('LoginPage', {}, {
+    this.navCtrl.setRoot('MapaPage', {}, {
       animate: true,
       direction: 'forward'
     });
