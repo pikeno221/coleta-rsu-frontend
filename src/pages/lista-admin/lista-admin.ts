@@ -63,10 +63,10 @@ export class ListaAdminPage {
   public ConcluirItem(item) {
     item.status = "CONCLUIDO";
     item.usuario = item.usuario.id;
-    console.log('pre', this.currentItems);
-    this.agendamento.AtualizarAgendamento(item);
-    this.currentItems.splice(this.currentItems.indexOf(item), 1);
-    console.log('pos', this.currentItems);
+    this.agendamento.AtualizarAgendamento(item).subscribe(data =>{
+      this.currentItems.splice(this.currentItems.indexOf(item), 1);
+      this.tabs.atualizarTodaAbas();
+    } );
     this.BindList();
     
 

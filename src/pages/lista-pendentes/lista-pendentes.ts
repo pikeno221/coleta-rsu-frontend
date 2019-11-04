@@ -68,8 +68,9 @@ export class ListaPendentesPage {
     console.log(item)
     item.status = "CANCELADO"
     item.usuario = item.usuario.id
-    this.agendamento.AtualizarAgendamento(item);
-  this.currentItems.splice(this.currentItems.indexOf(item), 1);
+    this.agendamento.AtualizarAgendamento(item).subscribe(data =>{
+      this.currentItems.splice(this.currentItems.indexOf(item), 1);
+    } );
     
     
   }
