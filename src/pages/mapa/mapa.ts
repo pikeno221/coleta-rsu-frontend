@@ -17,9 +17,9 @@ export class MapaPage {
   destinationPosition: string;
   public enderecos:string[];
 
-  constructor(public navCtrl: NavController, navParams: NavParams, enderecos:string[]) { 
+  constructor(public navCtrl: NavController, navParams: NavParams) { 
     this.enderecos = navParams.get('enderecos');
-    console.log('enderecooos --> ', enderecos);
+    console.log('enderecooos --> ', this.enderecos);
   }
 
   ionViewDidLoad() {
