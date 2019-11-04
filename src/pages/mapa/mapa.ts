@@ -53,17 +53,19 @@ export class MapaPage {
     if (this.destinationPosition && this.originPosition) {
         console.log('destinationPosition', this.destinationPosition);
         console.log('originPosition', this.originPosition);
+        let addressStop = [];
+        this.enderecos.forEach(endereco => {
+          addressStop.push({
+            location: endereco,
+            stopover: false
+          })
+        })
+
         const request = {
         // Pode ser uma coordenada (LatLng), uma string ou um lugar
         origin: this.originPosition,
         destination: this.destinationPosition,
-        waypoints: [{
-            location: 'Av Abilio Machado, Alipio de Melo',
-            stopover: false
-          },{
-            location: 'Avenida do Contorno, Savassi',
-            stopover: false
-          }],
+        waypoints: addressStop,
         travelMode: 'DRIVING'
       };
 
