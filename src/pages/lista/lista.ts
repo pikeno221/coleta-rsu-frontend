@@ -25,13 +25,16 @@ export class ListaPage {
     public usuario: Usuario,
     public tabs: TabsPage,
     public toastCtrl?: ToastController) {
-    this.BindList();
+    //this.BindList();
     //this.currentItems = this.items.query();
   }
   /**
    * The view loaded, let's query our items for the list
    */
   ionViewDidLoad() {
+  }
+  ionViewWillEnter() {
+    this.BindList();
   }
   /**
    * Prompt the usuario to add a new item. This shows our ItemCreatePage in a

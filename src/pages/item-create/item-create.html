@@ -4,18 +4,18 @@
     <ion-title>Novo Agendamento</ion-title>
     <ion-buttons start>
       <button ion-button (click)="cancel()">
-        <span color="primary" showWhen="ios">
-          {{ 'CANCEL_BUTTON' | translate }}
+        <span color="primary">
+          CANCELAR 
         </span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        <ion-icon name="md-close"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end>
       <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
-        <span color="primary" showWhen="ios">
-          {{ 'DONE_BUTTON' | translate }}
+        <span color="primary">
+          AGENDAR
         </span>
-        <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+        <ion-icon name="md-checkmark"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
@@ -32,7 +32,7 @@
       </ion-item>
       <ion-item>
           <ion-label>  Material</ion-label>
-          <ion-select formControlName="materiaisColeta" multiple="true" cancelText="Nah" okText="Okay!">
+          <ion-select formControlName="materiaisColeta" multiple="true" cancelText="Cancelar" okText="Confirmar">
             <ion-option value="plastico" selected="true">Plástico</ion-option>
             <ion-option value="vidro">Vidro</ion-option>
             <ion-option value="papel" selected="true">Papel</ion-option>

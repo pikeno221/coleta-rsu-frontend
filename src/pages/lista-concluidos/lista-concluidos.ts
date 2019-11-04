@@ -32,6 +32,10 @@ export class ListaConcluidosPage {
     console.log('ionViewDidLoad ListaConcluidosPage');
   }
 
+  ionViewWillEnter() {
+    this.BindList();
+  }
+
   public BindList(item?:any){
     this.currentItems = [];
     this.data.dataAgendada = item ? `${new Date(item.dataAgendada).getUTCDate()}/${new Date(item.dataAgendada).getUTCMonth()+1}/${new Date(item.dataAgendada).getUTCFullYear()}` : this.data.dataAgendada;

@@ -23,11 +23,15 @@ export class ListaAdminConcluidosPage {
     dataAgendadaFim: '01/12/2019'
   };
   constructor(public navCtrl: NavController, public navParams: NavParams, public usuario: Usuario, public agendamento: AgendamentoProvider, public tabs:TabsAdminPage) {
-    this.BindList()
+    //this.BindList()
   }
   currentItems: Item[] = [];
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaConcluidosPage');
+
+  }
+
+  ionViewWillEnter() {
+    this.BindList();
   }
 
   public BindList(item?:any){

@@ -32,12 +32,16 @@ export class ListaAdminCanceladasPage {
     public agendamento:AgendamentoProvider,
     public usuario: Usuario,
     public tabs: TabsAdminPage) {
-      this.BindList();
+      //this.BindList();
     
     }
   
     ionViewDidLoad() {
       console.log('ionViewDidLoad ListaPendentesPage');
+    }
+
+    ionViewWillEnter() {
+      this.BindList();
     }
   
     public BindList(item?:any){

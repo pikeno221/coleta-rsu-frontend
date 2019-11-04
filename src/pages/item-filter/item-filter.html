@@ -4,18 +4,18 @@
     <ion-title>Filtrar por data</ion-title>
     <ion-buttons start>
       <button ion-button (click)="cancel()">
-        <span color="primary" showWhen="ios">
-          {{ 'CANCEL_BUTTON' | translate }}
+        <span color="primary">
+          CANCELAR
         </span>
-        <ion-icon name="md-close" showWhen="android,windows"></ion-icon>
+        <ion-icon name="md-close"≈></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons end>
       <button ion-button (click)="done()" [disabled]="!isReadyToSave" strong>
-        <span color="primary" showWhen="ios">
-          {{ 'DONE_BUTTON' | translate }}
+        <span color="primary">
+          FILTRAR
         </span>
-        <ion-icon name="md-checkmark" showWhen="core,android,windows"></ion-icon>
+        <ion-icon name="md-checkmark"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>

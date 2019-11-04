@@ -26,8 +26,12 @@ export class ListaPendentesPage {
   currentItems: Item[] = [];
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, 
     public agendamento: AgendamentoProvider, public usuario: Usuario) {
-    this.BindList();
+    //this.BindList();
     
+  }
+
+  ionViewWillEnter() {
+    this.BindList();
   }
 
   ionViewDidLoad() {
@@ -65,7 +69,7 @@ export class ListaPendentesPage {
     item.status = "CANCELADO"
     item.usuario = item.usuario.id
     this.agendamento.AtualizarAgendamento(item);
-    this.currentItems.splice(this.currentItems.indexOf(item), 1);
+  this.currentItems.splice(this.currentItems.indexOf(item), 1);
     
     
   }

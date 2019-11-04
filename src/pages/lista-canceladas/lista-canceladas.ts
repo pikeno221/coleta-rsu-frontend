@@ -32,8 +32,12 @@ export class ListaCanceladasPage {
     public agendamento:AgendamentoProvider,
     public usuario: Usuario,
     public tabs: TabsPage) {
-      this.BindList();
+      //this.BindList();
     
+    }
+
+    ionViewWillEnter() {
+      this.BindList();
     }
   
     ionViewDidLoad() {
