@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, ModalController, NavController, Select } from 'ionic-angular';
 import { Item } from '../../models/item';
 import { Items, Usuario } from '../../providers';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
@@ -18,6 +18,9 @@ export class ListaAdminPage {
     dataAgendadaFim: '01/12/2019'
   };
   currentItems: Item[] = [];
+  hideMe: boolean;
+
+  @ViewChild('mySelect') selectRef: Select;
   constructor(public navCtrl: NavController,
     public items: Items,
     public modalCtrl: ModalController,
@@ -25,6 +28,7 @@ export class ListaAdminPage {
     public usuario: Usuario,
     public tabs: TabsAdminPage) {
     this.BindList();
+    this.hideMe = true;
     //this.currentItems = this.items.query();
   }
   /**
@@ -63,12 +67,12 @@ export class ListaAdminPage {
   public ConcluirItem(item) {
     item.status = "CONCLUIDO";
     item.usuario = item.usuario.id;
-    this.agendamento.AtualizarAgendamento(item).subscribe(data =>{
+    this.agendamento.AtualizarAgendamento(item).subscribe(data => {
       this.currentItems.splice(this.currentItems.indexOf(item), 1);
       this.tabs.atualizarTodaAbas();
-    } );
+    });
     this.BindList();
-    
+
 
   }
 
@@ -78,4 +82,24 @@ export class ListaAdminPage {
     });
   }
 
+  public redirecionarMapa(items) {
+    console.log(items);
+
+
+  }
+
+  public showTodayRouteModal() {
+    this.selectRef.open();
+  }
+
+  onChange($event) {
+    console.log('ok event');
+    console.log($event);
+    let enderecos: string[];
+    enderecos = $event;
+    console.log(enderecos);
+    this.navCtrl.push('MapaPage', {
+      enderecos
+    });
+  }
 }

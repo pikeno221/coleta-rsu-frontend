@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, ModalController, NavController, ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, ModalController, NavController, ToastController, Select } from 'ionic-angular';
 import { Item } from '../../models/item';
 import { Items, Usuario } from '../../providers';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
@@ -18,6 +18,8 @@ export class ListaPage {
   };
  
   currentItems: Item[] = [];
+  hideMe: boolean;
+  @ViewChild('mySelect') selectRef: Select;
   constructor(public navCtrl: NavController, 
     public items: Items, 
     public modalCtrl: ModalController, 
@@ -25,8 +27,7 @@ export class ListaPage {
     public usuario: Usuario,
     public tabs: TabsPage,
     public toastCtrl?: ToastController) {
-    //this.BindList();
-    //this.currentItems = this.items.query();
+    
   }
   /**
    * The view loaded, let's query our items for the list
@@ -86,5 +87,8 @@ export class ListaPage {
       item: item
     });
   }
+
+
+  
 
 }
