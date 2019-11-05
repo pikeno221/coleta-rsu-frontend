@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Geolocation } from '@ionic-native/geolocation';
 
 declare var google;
 
@@ -12,24 +13,34 @@ export class MapaPage {
   directionsService = new google.maps.DirectionsService();
   directionsDisplay = new google.maps.DirectionsRenderer();
   map: any;
+  latitudeInicial: any;
+  longitudeInicial: any;
   startPosition: any;
   originPosition: string;
   destinationPosition: string;
-  public enderecos:string[];
+  public enderecos: string[];
 
-  constructor(public navCtrl: NavController, navParams: NavParams) { 
+  constructor(public navCtrl: NavController, navParams: NavParams, private geolocation: Geolocation) {
     this.enderecos = navParams.get('enderecos');
-    console.log('enderecooos --> ', this.enderecos);
+    this.geolocation.getCurrentPosition().then((resp) => {
+      this.latitudeInicial = resp.coords.latitude
+      this.longitudeInicial = resp.coords.longitude
+      this.initializeMap();
+    }).catch((error) => {
+      console.log('Error getting location', error);
+    });
   }
 
+  
   ionViewDidLoad() {
     console.log('passou aqui');
-    this.initializeMap();
+    
   }
 
   initializeMap() {
-      
-    this.startPosition = new google.maps.LatLng(-19.9881067, -43.8459882);
+    console.log('latitude', this.latitudeInicial)
+    console.log('longitude', this.longitudeInicial);
+    this.startPosition = new google.maps.LatLng(this.latitudeInicial, this.longitudeInicial);
     console.log('startPosition', this.startPosition);
     const mapOptions = {
       zoom: 14,
@@ -42,7 +53,7 @@ export class MapaPage {
 
     this.directionsDisplay.setMap(this.map);
     console.log('directionsDisplay -> ', this.directionsDisplay);
-    
+
     const marker = new google.maps.Marker({
       position: this.startPosition,
       map: this.map,
@@ -51,17 +62,17 @@ export class MapaPage {
 
   calculateRoute() {
     if (this.destinationPosition && this.originPosition) {
-        console.log('destinationPosition', this.destinationPosition);
-        console.log('originPosition', this.originPosition);
-        let addressStop = [];
-        this.enderecos.forEach(endereco => {
-          addressStop.push({
-            location: endereco,
-            stopover: false
-          })
+      console.log('destinationPosition', this.destinationPosition);
+      console.log('originPosition', this.originPosition);
+      let addressStop = [];
+      this.enderecos.forEach(endereco => {
+        addressStop.push({
+          location: endereco,
+          stopover: false
         })
+      })
 
-        const request = {
+      const request = {
         // Pode ser uma coordenada (LatLng), uma string ou um lugar
         origin: this.originPosition,
         destination: this.destinationPosition,
@@ -81,8 +92,8 @@ export class MapaPage {
         display.setDirections(result);
         console.log(display);
       } else {
-          console.log('status -> ', status);
-          console.log('result -> ', result);
+        console.log('status -> ', status);
+        console.log('result -> ', result);
       }
     });
   }

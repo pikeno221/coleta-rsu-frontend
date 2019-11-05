@@ -6,6 +6,7 @@ import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
 import { TabsPage } from '../tabs/tabs';
 
 
+
 /**
  * Generated class for the ListaPendentesPage page.
  *
@@ -25,6 +26,7 @@ export class ListaPendentesPage {
   };
   currentItems: Item[] = [];
   hideMe: boolean;
+  pos: number;
 
   @ViewChild('mySelect') selectRef: Select;
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController,
@@ -33,6 +35,7 @@ export class ListaPendentesPage {
     this.BindList();
 
   }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ListaPendentesPage');
@@ -85,7 +88,7 @@ export class ListaPendentesPage {
   onChange($event) {
     console.log('ok event');
     console.log($event);
-    let enderecos: string [];
+    let enderecos: string[];
     enderecos = $event;
     console.log(enderecos);
     this.navCtrl.push('MapaPage', {
