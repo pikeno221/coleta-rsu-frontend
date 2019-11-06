@@ -82,27 +82,17 @@ export class MapaPage {
       this.destinationPosition = this.enderecos[(this.enderecos.length -1)];
       console.log('destinationPosition', this.destinationPosition);
       console.log('addressStop', addressStop)
-      if (this.enderecos.length > 1) {
-        request = {
-          // Pode ser uma coordenada (LatLng), uma string ou um lugar
-          origin: this.startPosition,
-          destination: this.destinationPosition,
-          waypoints: addressStop,
-          optimizeWaypoints: true,
-          provideRouteAlternatives: true,
-          travelMode: 'DRIVING'
-        }
-      } else {
-         request = {
-          // Pode ser uma coordenada (LatLng), uma string ou um lugar
-          origin: this.startPosition,
-          destination: this.destinationPosition,
-          optimizeWaypoints: true,
-          provideRouteAlternatives: true,
-          travelMode: 'DRIVING'
-        }
+      request = {
+        // Pode ser uma coordenada (LatLng), uma string ou um lugar
+        origin: this.startPosition,
+        destination: this.destinationPosition,
+        optimizeWaypoints: true,
+        provideRouteAlternatives: true,
+        travelMode: 'DRIVING'
       }
-
+      if (this.enderecos.length > 1) {
+        request.waypoints = addressStop;
+      }
       console.log('request -> ', request)
       this.traceRoute(this.directionsService, this.directionsDisplay, request);
     }

@@ -72,7 +72,7 @@ export class ListaAdminPendentesPage {
     this.currentItems.splice(this.currentItems.indexOf(item), 1);
   }
 
-  Confirmar(item){
+  confirmar(item){
     item.status = "AGENDAMENTO_CONFIRMADO"
     item.usuario = item.usuario.id
     this.agendamento.AtualizarAgendamento(item).subscribe(data =>{
