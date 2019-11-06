@@ -14,7 +14,7 @@ import { Settings, Usuario, Api } from '../providers';
 import { MyApp } from './app.component';
 import { ColetaProvider } from '../providers/coleta/coleta';
 import { AgendamentoProvider } from '../providers/agendamento/agendamento';
-import { Geolocation } from '@ionic-native/geolocation';
+import { Geolocation,GeolocationOptions } from '@ionic-native/geolocation';
 
 // The translate loader needs to know where to load i18n files
 // in Ionic's static asset pipeline.
