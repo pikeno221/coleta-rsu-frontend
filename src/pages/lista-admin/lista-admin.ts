@@ -84,10 +84,8 @@ export class ListaAdminPage {
 
   public redirecionarMapa(items) {
     console.log(items);
-
-
   }
-
+  
   public showTodayRouteModal() {
     this.selectRef.open();
   }
@@ -103,3 +101,4 @@ export class ListaAdminPage {
     });
   }
 }
+
