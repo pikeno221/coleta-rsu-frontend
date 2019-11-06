@@ -32,7 +32,6 @@ export class LoginPage {
 
       if (usuario){
         usuario = JSON.parse(usuario).usuario;
-        console.log(usuario)
       
         this.usuarioService._usuario = usuario;
         if (this.usuarioService._usuario.email == "admin@admin.com")
