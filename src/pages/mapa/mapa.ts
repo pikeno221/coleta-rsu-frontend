@@ -62,6 +62,7 @@ export class MapaPage {
   }
 
   calculateRoute() {
+    var request;
     if (this.enderecos && this.startPosition) {
       let addressStop = [];
       console.log(this.enderecos);
@@ -82,7 +83,7 @@ export class MapaPage {
       console.log('destinationPosition', this.destinationPosition);
       console.log('addressStop', addressStop)
       if (this.enderecos.length > 1) {
-        const request = {
+        request = {
           // Pode ser uma coordenada (LatLng), uma string ou um lugar
           origin: this.startPosition,
           destination: this.destinationPosition,
@@ -92,7 +93,7 @@ export class MapaPage {
           travelMode: 'DRIVING'
         }
       } else {
-        var request = {
+         request = {
           // Pode ser uma coordenada (LatLng), uma string ou um lugar
           origin: this.startPosition,
           destination: this.destinationPosition,
