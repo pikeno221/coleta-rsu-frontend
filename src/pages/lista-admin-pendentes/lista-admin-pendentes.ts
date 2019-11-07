@@ -27,12 +27,14 @@ export class ListaAdminPendentesPage {
   currentItems: Item[] = [];
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, 
     public agendamento: AgendamentoProvider, public usuario: Usuario, public tabs:TabsAdminPage) {
-    //this.BindList();
+      console.log('passou 1');
+      //this.BindList();
     
   }
 
   ionViewWillEnter() {
     this.BindList();
+    console.log('passou 2');
   }
 
   ionViewDidLoad() {
@@ -41,6 +43,8 @@ export class ListaAdminPendentesPage {
 
   public BindList(item?:any)
   {
+    console.log('passou 3');
+
     this.currentItems = [];
     this.data.dataAgendada = item ? `${new Date(item.dataAgendada).getUTCDate()}/${new Date(item.dataAgendada).getUTCMonth()+1}/${new Date(item.dataAgendada).getUTCFullYear()}` : this.data.dataAgendada;
     this.data.dataAgendadaFim = item ? `${new Date(item.dataAgendadaFim).getUTCDate()}/${new Date(item.dataAgendadaFim).getUTCMonth()+1}/${new Date(item.dataAgendadaFim).getUTCFullYear()}` : this.data.dataAgendadaFim;

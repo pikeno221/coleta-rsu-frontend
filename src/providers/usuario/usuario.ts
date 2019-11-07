@@ -68,6 +68,10 @@ export class Usuario {
    * the usuario entered on the form.
    */
   signup(accountInfo: any) {
+    console.log('accountInfo', accountInfo);
+    accountInfo.tipoPessoa = 'PESSOA_FISICA';
+    // mudar status quando tiver moderação de usuários.
+    accountInfo.statusUsuario = 'ATIVO';
     let seq = this.api.post('usuarios', accountInfo).share();
 
     seq.subscribe((res: any) => {

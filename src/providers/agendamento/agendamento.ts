@@ -31,7 +31,6 @@ export class AgendamentoProvider {
     }
 
     buscarTodosAdmin(dataInicio:string, dataFim: string, situacao:string) {
-      console.log('chamou');
       return this.api.get(`agendamentos?dataInicio=${dataInicio}&dataFim=${dataFim}&filtro=${situacao}`, null, this.header ).map(res => {
           return res;
       })
