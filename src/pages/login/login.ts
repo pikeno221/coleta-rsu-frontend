@@ -35,7 +35,7 @@ export class LoginPage {
         console.log(usuario)
       
         this.usuarioService._usuario = usuario;
-        if (this.usuarioService._usuario.email == "admin@admin.com")
+        if (this.usuarioService._usuario.email == "ascapcoletaseletiva@gmail.com")
         {
           this.navCtrl.push('TabsAdminPage', {
           usuario: usuario
@@ -51,7 +51,7 @@ export class LoginPage {
   // Attempt to login in through our usuario service
   doLogin() {
     this.usuarioService.login(this.usuario).subscribe((resp) => {
-      if (this.usuarioService._usuario.email == "admin@admin.com")
+      if (this.usuarioService._usuario.email == "ascapcoletaseletiva@gmail.com")
         {
           this.navCtrl.push('TabsAdminPage', {
           usuario: this.usuario
