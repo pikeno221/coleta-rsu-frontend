@@ -27,13 +27,11 @@
       </ion-item-sliding>
     </ion-list>
 
-    <ion-select  multiple="true" #mySelect [hidden]='hideMe' (ionChange)="onChange($event)">
+    <ion-select  multiple="true" #mySelect [hidden]='true' (ionChange)="onChange($event)">
       <ion-option *ngFor="let item of currentItems" [value]="item.usuario.endereco">{{item.usuario.endereco}}</ion-option>
   </ion-select>
 
-  <button ion-button full color="danger" (click)="showTodayRouteModal()">Calcular Rota </button>
-
-
+  <button ion-button full color="danger" *ngIf="hideMe" (click)="showTodayRouteModal()">Calcular Rota </button>
   
    </ion-content>
 

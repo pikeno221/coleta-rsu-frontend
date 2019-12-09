@@ -51,12 +51,6 @@ export class ItemFilterPage {
    * back to the presenter.
    */
   done() {
-    // if (!this.form.valid) { return; }
-    // let dataSelecionada = new Date(this.form.value['dataAgendada']);
-    // this.form.value['usuario'] = this.usuario._usuario.id
-    // this.form.value['dataAgendada'] = dataSelecionada.getDate() + "/" + dataSelecionada.getMonth()+ "/" + dataSelecionada.getFullYear()  + " " + new Date(this.form.value['dataAgendada']).toTimeString();
-    // this.form.value['status'] = 'AGUARDANDO_CONFICAMACAO';
-    // console.log(this.form.value);
     this.viewCtrl.dismiss(this.form.value);
   }
 }

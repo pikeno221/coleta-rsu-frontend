@@ -35,7 +35,6 @@ export class ListaPendentesPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaPendentesPage');
   }
 
   public BindList(item?:any){
@@ -64,8 +63,6 @@ export class ListaPendentesPage {
   }
   // cancela agendamento
   public deleteItem(item) {
-    
-    console.log(item)
     item.status = "CANCELADO"
     item.usuario = item.usuario.id
     this.agendamento.AtualizarAgendamento(item).subscribe(data =>{
@@ -74,15 +71,4 @@ export class ListaPendentesPage {
     
     
   }
-  // cria novo agendamento
-  // public addItem(){
-  //   let addModal = this.modalCtrl.create('ItemCreatePage');
-  //   console.log('lista pendente');
-  //   addModal.onDidDismiss(item => {
-  //     this.agendamento.salvarAgendamento(item);
-  //     this.BindList();  
-  //     //this.items.add(item);
-  //   })
-  //   addModal.present();
-  // }
 }

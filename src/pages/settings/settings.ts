@@ -90,6 +90,5 @@ export class SettingsPage {
   }
 
   ngOnChanges() {
-    console.log('Ng All Changes');
   }
 }

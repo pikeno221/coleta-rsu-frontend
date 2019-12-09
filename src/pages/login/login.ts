@@ -32,10 +32,9 @@ export class LoginPage {
 
       if (usuario){
         usuario = JSON.parse(usuario).usuario;
-        console.log(usuario)
       
         this.usuarioService._usuario = usuario;
-        if (this.usuarioService._usuario.email == "ascapcoletaseletiva@gmail.com")
+        if (this.usuarioService._usuario.tipoPessoa == "PESSOA_JURIDICA")
         {
           this.navCtrl.push('TabsAdminPage', {
           usuario: usuario
@@ -51,7 +50,7 @@ export class LoginPage {
   // Attempt to login in through our usuario service
   doLogin() {
     this.usuarioService.login(this.usuario).subscribe((resp) => {
-      if (this.usuarioService._usuario.email == "ascapcoletaseletiva@gmail.com")
+      if (this.usuarioService._usuario.tipoPessoa == "PESSOA_JURIDICA")
         {
           this.navCtrl.push('TabsAdminPage', {
           usuario: this.usuario

@@ -35,7 +35,6 @@ export class InicioPage {
   }
 
   ionViewDidLoad() {
-    console.log('passou1');
 
   }
 
@@ -54,7 +53,6 @@ export class InicioPage {
     if (!this.form.valid) { return; }
     this.form.value['idUsuario'] = window.localStorage.getItem('idUsuario');
     this.form.value['situacao'] = 'Aguardando confirmação';
-    console.log(this.form.value);
     this.coleta.salvarColeta(this.form.value);
     this.viewCtrl.dismiss(this.form.value);
   }

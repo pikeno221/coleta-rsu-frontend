@@ -29,7 +29,6 @@ export class ListaConcluidosPage {
   }
   
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaConcluidosPage');
   }
 
   ionViewWillEnter() {

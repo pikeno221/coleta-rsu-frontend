@@ -59,7 +59,6 @@ export class ItemCreatePage {
     this.form.value['usuario'] = this.usuario._usuario.id
     this.form.value['dataAgendada'] = dataSelecionada.getUTCDate() + "/" + (dataSelecionada.getUTCMonth()+1)+ "/" + dataSelecionada.getUTCFullYear()  + " " + dataSelecionada.getUTCHours() + ":" + dataSelecionada.getUTCMinutes();
     this.form.value['status'] = 'AGUARDANDO_CONFICAMACAO';
-    console.log(this.form.value);
     this.viewCtrl.dismiss(this.form.value);
   }
 }

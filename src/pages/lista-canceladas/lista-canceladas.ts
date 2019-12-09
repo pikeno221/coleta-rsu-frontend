@@ -41,7 +41,6 @@ export class ListaCanceladasPage {
     }
   
     ionViewDidLoad() {
-      console.log('ionViewDidLoad ListaPendentesPage');
     }
   
     public BindList(item?:any)

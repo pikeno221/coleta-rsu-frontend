@@ -21,29 +21,25 @@ import { TabsAdminPage } from '../tabs-admin/tabs-admin';
 })
 export class ListaAdminPendentesPage {
   data: { dataAgendada: string, dataAgendadaFim: string} = {
-    dataAgendada: '01/01/2019',
-    dataAgendadaFim: '01/12/2019'
+    dataAgendada: '01/12/2019',
+    dataAgendadaFim: '31/12/2019'
   };
   currentItems: Item[] = [];
   constructor(public navCtrl: NavController, public items: Items, public modalCtrl: ModalController, 
     public agendamento: AgendamentoProvider, public usuario: Usuario, public tabs:TabsAdminPage) {
-      console.log('passou 1');
       //this.BindList();
     
   }
 
   ionViewWillEnter() {
     this.BindList();
-    console.log('passou 2');
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ListaAdminPendentesPage');
   }
 
   public BindList(item?:any)
   {
-    console.log('passou 3');
 
     this.currentItems = [];
     this.data.dataAgendada = item ? `${new Date(item.dataAgendada).getUTCDate()}/${new Date(item.dataAgendada).getUTCMonth()+1}/${new Date(item.dataAgendada).getUTCFullYear()}` : this.data.dataAgendada;
@@ -68,8 +64,6 @@ export class ListaAdminPendentesPage {
   }
   // cancela agendamento
   public deleteItem(item) {
-    
-    console.log(item)
     item.status = "CANCELADO"
     item.usuario = item.usuario.id
     this.agendamento.AtualizarAgendamento(item);

@@ -37,7 +37,6 @@ export class ListaAdminCanceladasPage {
     }
   
     ionViewDidLoad() {
-      console.log('ionViewDidLoad ListaPendentesPage');
     }
 
     ionViewWillEnter() {

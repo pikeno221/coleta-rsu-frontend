@@ -17,7 +17,7 @@ export class MapaPage {
   latitudeInicial: any;
   longitudeInicial: any;
   startPosition: any;
-  destinationPosition: string;
+  destinationPosition: any;
   public enderecos: string[];
 
   constructor(public navCtrl: NavController, navParams: NavParams, private geolocation: Geolocation) {
@@ -25,7 +25,7 @@ export class MapaPage {
     this.geolocation.getCurrentPosition().then((resp) => {
       this.latitudeInicial = resp.coords.latitude
       this.longitudeInicial = resp.coords.longitude
-      
+
       this.initializeMap();
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -34,13 +34,10 @@ export class MapaPage {
 
 
   ionViewDidLoad() {
-    console.log('passou aqui');
 
   }
 
   initializeMap() {
-    console.log('latitude', this.latitudeInicial)
-    console.log('longitude', this.longitudeInicial);
     this.startPosition = new google.maps.LatLng(parseFloat(this.latitudeInicial), parseFloat(this.longitudeInicial));
     const mapOptions = {
       zoom: 14,
@@ -52,9 +49,9 @@ export class MapaPage {
     const marker = new google.maps.Marker({
       position: this.startPosition,
       map: this.map,
-      animation: google.maps.Animation.BOUNCE,
+      animation: google.maps.Animation.DROP,
     });
-    
+
     this.directionsDisplay.setMap(this.map);
     this.calculateRoute();
 
@@ -65,8 +62,6 @@ export class MapaPage {
     var request;
     if (this.enderecos && this.startPosition) {
       let addressStop = [];
-      console.log(this.enderecos);
-
       if (this.enderecos.length > 1) {
         var tst = true;
       }
@@ -77,39 +72,34 @@ export class MapaPage {
         })
       });
 
-      console.log('this.enderecos.length', this.enderecos.length);
-      console.log(this.enderecos[this.enderecos[(this.enderecos.length -1)]]);
-      this.destinationPosition = this.enderecos[(this.enderecos.length -1)];
-      console.log('destinationPosition', this.destinationPosition);
-      console.log('addressStop', addressStop)
+      this.destinationPosition = new google.maps.LatLng(parseFloat('-19.9893861'), parseFloat('-43.8454971'));
+      console.log('this.destinationPosition --> ', this.destinationPosition)
       request = {
         // Pode ser uma coordenada (LatLng), uma string ou um lugar
         origin: this.startPosition,
         destination: this.destinationPosition,
         optimizeWaypoints: true,
-        provideRouteAlternatives: true,
+        provideRouteAlternatives: false,
+        waypoints: addressStop,
         travelMode: 'DRIVING'
       }
-      if (this.enderecos.length > 1) {
-        request.waypoints = addressStop;
-      }
-      console.log('request -> ', request)
+
       this.traceRoute(this.directionsService, this.directionsDisplay, request);
     }
   }
 
   traceRoute(service: any, display: any, request: any) {
-      service.route(request, function (result, status) {
-        if (status == 'OK') {
-          console.log('result ok -> ', result);
-          console.log('status ok -> ', status);
-          display.setDirections(result);
-          console.log(display);
-        } else {
-          console.log('status -> ', status);
-          console.log('result -> ', result);
-        }
+    service.route(request, function (result, status) {
+      console.log(result.routes[0].legs[0])
+      result.routes[0].legs[0].steps.forEach(element => {
+        console.log(element);
+        
       });
-      console.log('passou aqui 1');
+      if (status == 'OK') {
+        display.setDirections(result);
+      } else {
+
+      }
+    });
   }
 }

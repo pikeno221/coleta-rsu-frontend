@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, ModalController, NavController, Select } from 'ionic-angular';
+import { IonicPage, ModalController, NavController, Select, AlertController } from 'ionic-angular';
 import { Item } from '../../models/item';
 import { Items, Usuario } from '../../providers';
 import { AgendamentoProvider } from '../../providers/agendamento/agendamento';
@@ -15,7 +15,7 @@ import { TabsAdminPage } from '../tabs-admin/tabs-admin';
 export class ListaAdminPage {
   data: { dataAgendada: string, dataAgendadaFim: string } = {
     dataAgendada: '01/01/2019',
-    dataAgendadaFim: '01/12/2019'
+    dataAgendadaFim: '01/12/2020'
   };
   currentItems: Item[] = [];
   hideMe: boolean;
@@ -26,8 +26,8 @@ export class ListaAdminPage {
     public modalCtrl: ModalController,
     public agendamento: AgendamentoProvider,
     public usuario: Usuario,
-    public tabs: TabsAdminPage) {
-    this.BindList();
+    public tabs: TabsAdminPage,
+    private alertCtrl: AlertController) {
     this.hideMe = true;
     //this.currentItems = this.items.query();
   }
@@ -51,6 +51,7 @@ export class ListaAdminPage {
 
     this.agendamento.buscarTodosAdmin(this.data.dataAgendada, this.data.dataAgendadaFim, "AGENDAMENTO_CONFIRMADO").subscribe(data => {
       if (data.agendamentos) {
+        console.log('agendamentos --> ', data.agendamentos)
         for (let index = 0; index < data.agendamentos.length; index++) {
           const element = data.agendamentos[index];
           if (element.status == 'AGENDAMENTO_CONFIRMADO') {
@@ -83,19 +84,25 @@ export class ListaAdminPage {
   }
 
   public redirecionarMapa(items) {
-    console.log(items);
   }
-  
+
   public showTodayRouteModal() {
-    this.selectRef.open();
+    console.log('this.currentItems.length --> ', this.currentItems.length)
+    if (this.currentItems.length === 0) {
+      let alert = this.alertCtrl.create({
+        title: 'Nenhum agendamento encontrado para traçar rota'
+      })
+      alert.present();
+    } else {
+      this.selectRef.open();
+
+    }
+
   }
 
   onChange($event) {
-    console.log('ok event');
-    console.log($event);
     let enderecos: string[];
     enderecos = $event;
-    console.log(enderecos);
     this.navCtrl.push('MapaPage', {
       enderecos
     });
