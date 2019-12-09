@@ -32,7 +32,7 @@ export class TabsAdminPage {
       this.tab1Title = 'Confirmados';
       this.tab2Title = 'Pendentes';
       this.tab3Title = 'Cancelados';
-      this.tab4Title = 'Concluido';
+      this.tab4Title = 'Concluídos';
     });
   }
  
